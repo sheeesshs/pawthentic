@@ -27,53 +27,69 @@
       top: 0;
       left: 100%;
       margin-left: 5px;
-      width: 340px;
-      background: #d48700;
-      color: #fff;
-      font-size: 1.1rem;
-      border-radius: 16px;
-      padding: 1rem 1.5rem;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      width: 400px;
+      background-color: #d48700;
+      color: white;
+      font-weight: normal;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      border-radius: 20px;
+      padding: 1.2rem 2rem;
+      box-shadow: 3px 3px 6px rgb(0 0 0 / 0.2);
       z-index: 1000;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1rem;
-      animation: fadeIn 0.2s;
+      gap: 1.5rem;
     }
+
     .popup-bubble::before {
       content: "";
       position: absolute;
-      top: 18px;
-      left: -18px;
-      border-top: 12px solid transparent;
-      border-bottom: 12px solid transparent;
-      border-right: 18px solid #d48700;
+      top: 1px;
+      left: -25px;
+      width: 0;
+      height: 0;
+      border-top: 30px solid transparent;
+      border-bottom: 30px solid transparent;
+      border-right: 40px solid #d48700;
+      border-radius: 3px;
     }
+
     .popup-bubble p {
       margin: 0;
       width: 100%;
       text-align: center;
-      letter-spacing: 1px;
-      font-size: 1.1rem;
+      letter-spacing: 2px;
+      font-weight: normal;
+      font-size: 1.6rem;
+      white-space: nowrap;
     }
+
     .popup-bubble .flex {
-      gap: 1.2rem;
+      display: flex;
+      gap: 2rem;
       width: 100%;
       justify-content: center;
     }
+
     .popup-bubble a {
-      color: #fff;
+      color: white;
       text-decoration: none;
-      font-size: 1.1rem;
-      padding: 0.4rem 1.2rem;
-      border-radius: 8px;
+      font-weight: normal;
+      font-size: 2rem;
+      padding: 0.6rem 2rem;
+      border-radius: 12px;
       background: transparent;
-      transition: background 0.2s, color 0.2s;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
     }
+
     .popup-bubble a:hover {
-      background: #fff;
+      background-color: white;
       color: #d48700;
+    
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px);}
@@ -115,6 +131,7 @@
   </style>
 </head>
 <body class="min-h-screen flex flex-col bg-white">
+
   <!-- Top Bar -->
   <div class="bg-orange-500 py-2 px-4 flex justify-between items-center">
     <div class="flex space-x-4 text-white text-xl">
@@ -125,34 +142,52 @@
   </div>
 
   <!-- Header -->
-  <header class="relative z-40 bg-amber-100 py-4 px-6 flex justify-between items-center shadow-sm">
+  <header class="relative z-40 bg-amber-100 py-4 px-6 flex justify-between items-center">
     <div class="flex items-center space-x-6">
-      <a href="index.html" class="flex items-center text-3xl text-orange-500 font-bold">
-        <img src="images/LOGO.png" alt="Pawthentic Logo" class="h-12 w-auto mr-2" />
-      </a>
+      <div class="text-3xl text-orange-500 flex items-center">
+        <a href="index.html">
+          <img
+            src="images/LOGO.png"
+            alt="Pawthentic Logo"
+            class="h-12 w-auto mr-2"
+          />
+        </a>
+      </div>
+
       <nav class="hidden md:flex space-x-6 text-black text-lg items-center">
-        <a href="index.html" class="hover:text-orange-500 transition"><i class="fas fa-home"></i></a>
+        <a href="index.html" class="text-black text-lg"><i class="fas fa-home"></i></a>
+
         <!-- SERVICES DROPDOWN -->
-        <div class="group relative">
-          <button class="flex items-center focus:outline-none group-hover:text-orange-500 transition">
+        <div class="group">
+          <button class="flex items-center focus:outline-none group-hover:text-orange-500">
             SERVICES
-            <svg class="ml-1 w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M5.25 7.5l4.5 4.5 4.5-4.5h-9z"/></svg>
+            <svg class="ml-1 w-4 h-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5.25 7.5l4.5 4.5 4.5-4.5h-9z" />
+            </svg>
           </button>
-          <div class="absolute left-0 mt-2 w-72 bg-white bg-opacity-90 border rounded-md shadow-lg z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all p-4">
-            <a href="PETGROOMING.html" class="block px-4 py-2 text-lg hover:bg-orange-50 rounded">Pet Grooming</a>
-            <a href="petadoption.html" class="block px-4 py-2 text-lg hover:bg-orange-50 rounded">Pet Adoption Assistance</a>
+          <div
+            class="absolute left-0 mt-2 w-[2000px] bg-white bg-opacity-80 border rounded-md shadow-lg z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all p-6"
+          >
+            <a href="PETGROOMING.html" class="px-4 py-3 text-lg">Pet Grooming</a>
+            <a href="petadoption.html" class="block px-4 py-3 text-lg">Pet Adoption Assistance</a>
           </div>
         </div>
+
         <!-- PRODUCTS Dropdown -->
-        <div class="group relative">
-          <button class="flex items-center focus:outline-none group-hover:text-orange-500 transition">
+        <div class="group ">
+          <button class="flex items-center focus:outline-none group-hover:text-orange-500 text-black">
             PRODUCTS
-            <svg class="ml-1 w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M5.25 7.5l4.5 4.5 4.5-4.5h-9z"/></svg>
+            <svg class="ml-1 w-4 h-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5.25 7.5l4.5 4.5 4.5-4.5h-9z" />
+            </svg>
           </button>
-          <div class="absolute left-0 mt-2 w-[900px] bg-white bg-opacity-95 rounded-md shadow-lg z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all p-4 flex flex-wrap gap-4">
+
+          <div
+            class="absolute left-0 mt-2 w-full max-w-[2000px] bg-white bg-opacity-80 rounded-md shadow-lg z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all p-4 flex justify-center gap-4"
+          >
             <!-- Column 1 -->
-            <div class="min-w-[180px]">
-              <h3 class="text-black mb-2 font-semibold">FOOD & TREATS</h3>
+            <div class="min-w-[220px]">
+              <h3 class="text-black mb-2">FOOD & TREATS</h3>
               <div class="flex flex-col space-y-2">
                 <div class="relative">
                   <a href="wetfood.html" class="subcat-toggle block cursor-pointer" data-id="wetfoods">Wet Foods</a>
@@ -164,6 +199,7 @@
                     </div>
                   </div>
                 </div>
+
                 <div class="relative">
                   <a href="dryfood.html" class="subcat-toggle block cursor-pointer" data-id="dryfoods">Dry Foods</a>
                   <div id="dryfoods" class="hidden popup-bubble" style="left: 100%; margin-left: 10px;">
@@ -174,6 +210,7 @@
                     </div>
                   </div>
                 </div>
+
                 <div class="relative">
                   <a href="treats.html" class="subcat-toggle block cursor-pointer" data-id="treats">Treats</a>
                   <div id="treats" class="hidden popup-bubble" style="left: 100%; margin-left: 10px;">
@@ -186,9 +223,10 @@
                 </div>
               </div>
             </div>
+
             <!-- Column 2 -->
-            <div class="min-w-[180px]">
-              <h3 class="text-black mb-2 font-semibold">TOYS & ACCESSORIES</h3>
+            <div class="min-w-[220px]">
+              <h3 class="text-black mb-2">TOYS & ACCESSORIES</h3>
               <div class="flex flex-col space-y-2">
                 <div class="relative">
                   <a href="toys.html" class="subcat-toggle block cursor-pointer" data-id="toys">Toys</a>
@@ -200,6 +238,7 @@
                     </div>
                   </div>
                 </div>
+
                 <div class="relative">
                   <a href="feeding-supplies.html" class="subcat-toggle block cursor-pointer" data-id="feeding-supplies">Feeding Supplies</a>
                   <div id="feeding-supplies" class="hidden popup-bubble" style="left: 100%; margin-left: 10px;">
@@ -210,6 +249,7 @@
                     </div>
                   </div>
                 </div>
+
                 <div class="relative">
                   <a href="collars-leash-harness.html" class="subcat-toggle block cursor-pointer" data-id="collars-leash-harness">Collars, Leash & Harness</a>
                   <div id="collars-leash-harness" class="hidden popup-bubble" style="left: 100%; margin-left: 10px;">
@@ -220,6 +260,7 @@
                     </div>
                   </div>
                 </div>
+
                 <div class="relative">
                   <a href="carriers.html" class="subcat-toggle block cursor-pointer" data-id="carriers">Carriers</a>
                   <div id="carriers" class="hidden popup-bubble" style="left: 100%; margin-left: 10px;">
@@ -232,9 +273,10 @@
                 </div>
               </div>
             </div>
+
             <!-- Column 3 -->
-            <div class="min-w-[180px]">
-              <h3 class="text-black mb-2 font-semibold">GROOMING & HYGIENE</h3>
+            <div class="min-w-[220px]">
+              <h3 class="text-black mb-2">GROOMING & HYGIENE</h3>
               <div class="flex flex-col space-y-2">
                 <div class="relative">
                   <a href="ear-and-eye-care.html" class="subcat-toggle block cursor-pointer" data-id="ear-and-eye-care">Ear and Eye Care</a>
@@ -246,6 +288,7 @@
                     </div>
                   </div>
                 </div>
+
                 <div class="relative">
                   <a href="oral-care.html" class="subcat-toggle block cursor-pointer" data-id="oral-care">Oral Care</a>
                   <div id="oral-care" class="hidden popup-bubble" style="left: 100%; margin-left: 10px;">
@@ -256,6 +299,7 @@
                     </div>
                   </div>
                 </div>
+
                 <div class="relative">
                   <a href="bath-and-grooming-essentials.html" class="subcat-toggle block cursor-pointer" data-id="bath-and-grooming-essentials">Bath and Grooming Essentials</a>
                   <div id="bath-and-grooming-essentials" class="hidden popup-bubble" style="left: 100%; margin-left: 10px;">
@@ -268,9 +312,10 @@
                 </div>
               </div>
             </div>
+
             <!-- Column 4 -->
-            <div class="min-w-[180px]">
-              <h3 class="text-black mb-2 font-semibold">CLEANING & POTTY</h3>
+            <div class="min-w-[220px]">
+              <h3 class="text-black mb-2">CLEANING & POTTY</h3>
               <div class="flex flex-col space-y-2">
                 <div class="relative">
                   <a href="#" class="subcat-toggle block cursor-pointer" data-id="cleaning-supplies">Cleaning Supplies</a>
@@ -282,6 +327,7 @@
                     </div>
                   </div>
                 </div>
+
                 <div class="relative">
                   <a href="#" class="subcat-toggle block cursor-pointer" data-id="potty-essentials">Potty Essentials</a>
                   <div id="potty-essentials" class="hidden popup-bubble" style="left: 100%; margin-left: 10px;">
@@ -298,14 +344,15 @@
         </div>
       </nav>
     </div>
+
     <!-- Search + Icons -->
     <div class="flex items-center space-x-4">
-      <div class="relative">
+      <div class="relative ">
         <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
         <input
           type="text"
           placeholder="Search"
-          class="rounded-full border border-black pl-10 pr-4 py-2 focus:outline-none w-full text-gray-800 transition"
+          class="rounded-full border border-black pl-10 pr-4 py-2 focus:outline-none w-full text-gray-800"
         />
       </div>
       <a href="cart.html"><i class="fas fa-shopping-cart text-2xl"></i></a>
