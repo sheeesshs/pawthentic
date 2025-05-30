@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Home | Pawthentic</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+      color: #222;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .popup-bubble {
+      font-family: 'Poppins', sans-serif;
+      font-weight: normal;
+    }
+
+    .popup-bubble {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      margin-left: 5px;
+      width: 400px;
+      background-color: #d48700;
+      color: white;
+      font-weight: normal;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      border-radius: 20px;
+      padding: 1.2rem 2rem;
+      box-shadow: 3px 3px 6px rgb(0 0 0 / 0.2);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .popup-bubble::before {
+      content: "";
+      position: absolute;
+      top: 1px;
+      left: -25px;
+      width: 0;
+      height: 0;
+      border-top: 30px solid transparent;
+      border-bottom: 30px solid transparent;
+      border-right: 40px solid #d48700;
+      border-radius: 3px;
+    }
+
+    .popup-bubble p {
+      margin: 0;
+      width: 100%;
+      text-align: center;
+      letter-spacing: 2px;
+      font-weight: normal;
+      font-size: 1.6rem;
+      white-space: nowrap;
+    }
+
+    .popup-bubble .flex {
+      display: flex;
+      gap: 2rem;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .popup-bubble a {
+      color: white;
+      text-decoration: none;
+      font-weight: normal;
+      font-size: 2rem;
+      padding: 0.6rem 2rem;
+      border-radius: 12px;
+      background: transparent;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+    }
+
+    .popup-bubble a:hover {
+      background-color: white;
+      color: #d48700;
+    }
+
+    main {
+      padding: 2rem 1rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    h1.page-title {
+      font-size: 2rem;
+      font-weight: normal;
+      margin-bottom: 0.5rem;
+    }
+
+    h2.section-title {
+      font-size: 1.3rem;
+      font-weight: normal;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .products-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 10px;
+      width: 220px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.15);
+      text-align: center;
+      padding: 1rem;
+      flex-shrink: 0;
+    }
+
+    .product-card img {
+      width: 180px;
+      height: 180px;
+      object-fit: contain;
+      margin-bottom: 1rem;
+    }
+
+    .product-name {
+      font-weight: normal;
+      font-size: 0.9rem;
+      min-height: 54px;
+      margin-bottom: 0.4rem;
+    }
+
+    .rating {
+      color: #d48700;
+      font-size: 0.85rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .price {
+      font-weight: normal;
+      font-size: 1rem;
+      color: #004080;
+      margin-bottom: 1rem;
+    }
+
+    .add-to-cart-btn {
+      background-color: #004080;
+      color: white;
+      border: none;
+      padding: 12px 0;
+      border-radius: 15px;
+      cursor: pointer;
+      font-weight: normal;
+      font-size: 1.1rem;
+      transition: background-color 0.3s ease;
+      width: 100%;
+      text-align: center;
+      display: inline-block;
+    }
+
+    .add-to-cart-btn:hover {
+      background-color: #002d5a;
+    }
+
+    /* New modal styles for variation grid */
+    #variationGrid .variation-option {
+      cursor: pointer;
+      background: white;
+      color: #d48700;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+      font-weight: normal;
+      box-shadow: 0 2px 6px rgb(0 0 0 / 0.15);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      user-select: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    #variationGrid .variation-option img {
+      height: 50px;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+
+    #variationGrid .variation-option.selected {
+      background: white;
+      color: #004080;
+      box-shadow: 0 0 0 3px #004080;
+      transform: scale(1.05);
+    }
+
+    /* Quantity selector styles */
+    .quantity-container {
+      display: flex;
+      justify-content: space-between; /* Text left, buttons right */
+      align-items: center;
+      margin-bottom: 1.5rem;
+      font-weight: normal;
+      font-size: 1.25rem;
+      color: white;
+      gap: 1rem;
+    }
+
+    .quantity-label {
+      white-space: nowrap;
+    }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem; /* spacing between buttons and input */
+    }
+
+    .quantity-btn {
+      background-color: white;
+      color: #d48700;
+      font-weight: normal;
+      border-radius: 6px;
+      padding: 0.25rem 0.75rem;
+      user-select: none;
+      cursor: pointer;
+      border: none;
+      font-size: 1.5rem;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease;
+    }
+
+    .quantity-btn:hover {
+      background-color: #f0d78c;
+    }
+
+    .quantity-input {
+      width: 2.5rem;
+      text-align: center;
+      border-radius: 6px;
+      font-weight: normal;
+      font-size: 1.25rem;
+      border: none;
+      color: #004080;
+      background-color: white;
+      user-select: none;
+    }
+
+    .price-indicator {
+      letter-spacing: 1.5px;
+      text-shadow: 1px 1px 2px black;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+  <!-- Top Bar -->
+  <div class="bg-orange-500 py-2 px-4 flex justify-between items-center">
+    <div class="flex space-x-4 text-white text-xl">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-tiktok"></i></a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header
+    class="relative z-40 bg-amber-100 py-4 px-6 flex justify-between items-center"
+  >
+    <div class="flex items-center space-x-6">
+      <div class="text-3xl text-orange-500 flex items-center">
+        <a href="index.html">
+          <img
+            src="images/LOGO.png"
+            alt="Pawthentic Logo"
+            class="h-12 w-auto mr-2"
+          />
+        </a>
+      </div>
+
+      <nav
+        class="hidden md:flex space-x-6 text-black text-lg items-center"
+      >
+        <a href="index.html" class="text-black text-lg"
+          ><i class="fas fa-home"></i
+        ></a>
+
+        <!-- SERVICES DROPDOWN -->
+        <div class="group">
+          <button
+            class="flex items-center focus:outline-none group-hover:text-orange-500"
+          >
+            SERVICES
+            <svg
+              class="ml-1 w-4 h-4 fill-current"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M5.25 7.5l4.5 4.5 4.5-4.5h-9z" />
+            </svg>
+          </button>
+          <div
+            class="absolute left-0 mt-2 w-[2000px] bg-white bg-opacity-80 border rounded-md shadow-lg z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all p-6"
+          >
+            <a
+              href="PETGROOMING.html"
+              class=" px-4 py-3 text-lg"
+              >Pet Grooming</a
+            >
+            <a
+              href="petadoption.html"
+              class="block px-4 py-3 text-lg"
+              >Pet Adoption Assistance</a
+            >
+          </div>
+        </div>
+
+        <!-- PRODUCTS Dropdown -->
+        <div class="group ">
+          <button
+            class="flex items-center focus:outline-none group-hover:text-orange-500 text-black"
+          >
+            PRODUCTS
+            <svg
+              class="ml-1 w-4 h-4 fill-current"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M5.25 7.5l4.5 4.5 4.5-4.5h-9z" />
+            </svg>
+          </button>
+
+          <div
+            class="absolute left-0 mt-2 w-full max-w-[2000px] bg-white bg-opacity-80 rounded-md shadow-lg z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all p-4 flex justify-center gap-4"
+          >
+            <!-- Column 1 -->
+            <div class="min-w-[220px]">
+              <h3 class="text-black mb-2">FOOD & TREATS</h3>
+              <div class="flex flex-col space-y-2">
+                <div class="relative">
+                  <a
+                    href="wetfood.html"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="wetfoods"
+                    >Wet Foods</a
+                  >
+                  <div
+                    id="wetfoods"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="wetfood-cat.html">CAT</a>
+                      <a href="wetfood-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <a
+                    href="dryfood.html"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="dryfoods"
+                    >Dry Foods</a
+                  >
+                  <div
+                    id="dryfoods"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="dryfood-cat.html">CAT</a>
+                      <a href="dryfood-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <a
+                    href="treats.html"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="treats"
+                    >Treats</a
+                  >
+                  <div
+                    id="treats"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="treats-cat.html">CAT</a>
+                      <a href="treats-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Column 2 -->
+            <div class="min-w-[220px]">
+              <h3 class="text-black mb-2">TOYS & ACCESSORIES</h3>
+              <div class="flex flex-col space-y-2">
+                <div class="relative">
+                  <a
+                    href="toys.html"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="toys"
+                    >Toys</a
+                  >
+                  <div
+                    id="toys"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="toys-cat.html">CAT</a>
+                      <a href="toys-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <a
+                    href="feeding-supplies.html"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="feeding-supplies"
+                    >Feeding Supplies</a
+                  >
+                  <div
+                    id="feeding-supplies"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="feeding-supplies-cat.html">CAT</a>
+                      <a href="feeding-supplies-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <a
+                    href="collars-leash-harness.html"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="collars-leash-harness"
+                    >Collars, Leash & Harness</a
+                  >
+                  <div
+                    id="collars-leash-harness"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="collars-cat.html">CAT</a>
+                      <a href="collars-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <a
+                    href="carriers.html"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="carriers"
+                    >Carriers</a
+                  >
+                  <div
+                    id="carriers"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="carriers-cat.html">CAT</a>
+                      <a href="carriers-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Column 3 -->
+            <div class="min-w-[220px]">
+              <h3 class="text-black mb-2">GROOMING & HYGIENE</h3>
+              <div class="flex flex-col space-y-2">
+                <div class="relative">
+                  <a
+                    href="ear-and-eye-care.html"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="ear-and-eye-care"
+                    >Ear and Eye Care</a
+                  >
+                  <div
+                    id="ear-and-eye-care"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="ear-eye-cat.html">CAT</a>
+                      <a href="ear-eye-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <a
+                    href="oral-care.html"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="oral-care"
+                    >Oral Care</a
+                  >
+                  <div
+                    id="oral-care"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="oral-care-cat.html">CAT</a>
+                      <a href="oral-care-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <a
+                    href="bath-and-grooming-essentials.html"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="bath-and-grooming-essentials"
+                    >Bath and Grooming Essentials</a
+                  >
+                  <div
+                    id="bath-and-grooming-essentials"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="bath-grooming-cat.html">CAT</a>
+                      <a href="bath-grooming-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Column 4 -->
+            <div class="min-w-[220px]">
+              <h3 class="text-black mb-2">CLEANING & POTTY</h3>
+              <div class="flex flex-col space-y-2">
+                <div class="relative">
+                  <a
+                    href="#"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="cleaning-supplies"
+                    >Cleaning Supplies</a
+                  >
+                  <div
+                    id="cleaning-supplies"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="cleaning-supplies-cat.html">CAT</a>
+                      <a href="cleaning-supplies-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <a
+                    href="#"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="potty-essentials"
+                    >Potty Essentials</a
+                  >
+                  <div
+                    id="potty-essentials"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="potty-essentials-cat.html">CAT</a>
+                      <a href="potty-essentials-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+<!-- Right side: Search + Icons + About Us -->
+    <div class="flex items-center space-x-6">
+      <div class="relative">
+        <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
+        <input
+          type="text"
+          placeholder="Search"
+          class="rounded-full border border-black pl-10 pr-4 py-2 focus:outline-none w-48 text-gray-800"
+        />
+      </div>
+      <a href="cart.html" class="text-black"><i class="fas fa-shopping-cart text-2xl"></i></a>
+      <div class="relative account-container">
+        <button
+          id="accountBtn"
+          aria-haspopup="true"
+          aria-expanded="false"
+          class="focus:outline-none"
+          aria-label="User Account Menu"
+        >
+          <i class="fas fa-user text-2xl"></i>
+        </button>
+
+        <!-- Dropdown menu -->
+        <div
+          id="accountDropdown"
+          class="hidden absolute right-0 mt-2 w-60 bg-yellow-100 border border-yellow-400 rounded-md shadow-md z-50 p-4 text-gray-800"
+          role="menu"
+          aria-labelledby="accountBtn"
+        >
+          <div class="flex items-center space-x-2 mb-3 border-b border-yellow-400 pb-2">
+            <i class="fas fa-user text-xl text-yellow-900"></i>
+            <span class="font-semibold text-yellow-900">Account Name</span>
+          </div>
+
+          <nav class="flex flex-col space-y-2 text-yellow-900 text-sm font-semibold">
+            <div class="uppercase text-xs mb-1 font-bold tracking-wide text-yellow-800">My Account</div>
+            <a href="#" class="hover:text-yellow-600 focus:outline-none focus:text-yellow-600" role="menuitem">Personal Details</a>
+            <a href="#" class="hover:text-yellow-600 focus:outline-none focus:text-yellow-600" role="menuitem">Track Orders</a>
+
+            <div class="uppercase text-xs mt-4 mb-1 font-bold tracking-wide text-yellow-800">Account Settings</div>
+            <a href="#" class="hover:text-yellow-600 focus:outline-none focus:text-yellow-600" role="menuitem">Settings</a>
+            <a href="#" class="hover:text-yellow-600 focus:outline-none focus:text-yellow-600" role="menuitem">Log out</a>
+          </nav>
+        </div>
+      </div>
+      <a href="about-us.html" class="text-black text-lg hover:text-orange-500 font-semibold">ABOUT US</a>
+    </div>
+  </header>
+    
+    <!-- Mobile Menu -->
+    <div class="md:hidden flex justify-between items-center p-4">
+        <div class="text-3xl text-orange-500 flex items-center">
+            <img src="https://placehold.co/40x40" alt="Pawthentic Logo - cute paw logo" class="mr-2">
+            PAWTHENTIC
+        </div>
+        <button id="menuBtn">
+            <i class="fas fa-bars text-3xl"></i>
+        </button>
+    </div>
+
+<!-- Banner Carousel Section -->
+<section class="relative overflow-hidden">
+  <!-- Slides container -->
+  <div id="slider" class="flex transition-all duration-700 ease-in-out relative">
+    <!-- Slide 1 -->
+    <div class="min-w-full relative h-screen bg-yellow-400 flex items-center justify-center overflow-hidden">
+      <a href="#">
+        <img src="images/banner1.png" alt="Pedigree Products 1" class="min-w-full h-full object-cover">
+      </a>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="min-w-full relative h-screen bg-yellow-300 flex items-center justify-center overflow-hidden">
+      <a href="#">
+        <img src="images/banner2.png" alt="Pedigree Products 2" class="w-full h-full object-cover">
+      </a>
+    </div>
+  </div>
+
+  <!-- Controls: Prev / Next buttons -->
+  <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex items-center space-x-4 z-50">
+    <button id="prev" class="text-black p-3">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <!-- Navigation dots container - dots will be generated by JavaScript -->
+    <div id="carousel-dots" class="flex space-x-4"></div>
+    <button id="next" class="text-black p-3">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+</section>
+
+<section class="bg-white py-10 px-6">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- PET CATEGORIES -->
+    <h2 class="text-center text-black text-2xl md:text-2xl tracking-widest mt-10 mb-8">
+      PET CATEGORIES
+    </h2>
+    
+<div class="flex flex-wrap justify-center gap-16 mb-20">
+  <a href="#" class="hover:scale-105 transition">
+    <div class="bg-[#f7f4f2] pt-10 pb-5 px-10 rounded-xl flex flex-col items-center space-y-5">
+      <div class="bg-[#efa100] p-5 rounded-full">
+        <img src="ICONS/Dog - Pet Categories.png" alt="Dog Category" class="w-32 h-32 object-contain">
+      </div>
+      <span class="text-lg md:text-xl text-black uppercase">DOG</span>
+    </div>
+  </a>
+  <a href="#" class="hover:scale-105 transition">
+    <div class="bg-[#f7f4f2] pt-10 pb-5 px-10 rounded-xl flex flex-col items-center space-y-5">
+      <div class="bg-[#efa100] p-5 rounded-full">
+        <img src="ICONS/Cat - Pet Categories.png" alt="Cat Category" class="w-32 h-32 object-contain">
+      </div>
+      <span class="text-lg md:text-xl text-black uppercase">CAT</span>
+    </div>
+  </a>
+</div>
+
+<!-- OUR SERVICES -->
+<h2 class="text-center text-black text-2xl md:text-2xl tracking-widest mb-8">
+  OUR SERVICES
+</h2>
+<div class="flex flex-wrap justify-center gap-16 mb-20">
+  <a href="#" class="hover:scale-105 transition">
+    <div class="bg-[#f7f4f2] pt-10 pb-5 px-10 rounded-xl flex flex-col items-center space-y-5">
+      <div class="bg-[#efa100] p-5 rounded-full">
+        <img src="ICONS/Grooming - Our Services.png" alt="Grooming Service" class="w-32 h-32 object-contain">
+      </div>
+      <span class="text-lg md:text-xl text-black uppercase">GROOMING</span>
+    </div>
+  </a>
+  <a href="#" class="hover:scale-105 transition">
+    <div class="bg-[#f7f4f2] pt-10 pb-5 px-10 rounded-xl flex flex-col items-center space-y-5">
+      <div class="bg-[#efa100] p-5 rounded-full">
+        <img src="ICONS/Pet Adoption - Our Services.png" alt="Pet Adoption Service" class="w-32 h-32 object-contain">
+      </div>
+      <span class="text-lg md:text-xl text-black uppercase text-center">PET ADOPTION</span>
+    </div>
+  </a>
+</div>
+</section>
+
+
+
+<!-- BEST SELLERS Section -->
+<section class="bg-white py-10 px-6">
+  <h2 class="text-4xl font-extrabold mt-10 mb-10 text-center text-black">BEST SELLERS</h2>
+
+  <!-- Carousel Wrapper -->
+  <div class="relative max-w-7xl mx-auto">
+
+    <!-- Product Sets -->
+    <div id="set1" class="flex justify-center gap-6 flex-wrap transition-all duration-500">
+
+      <!-- Product 1 -->
+      <div class="w-56 flex flex-col h-[420px]">
+        <div class="border border-gray-300 h-48 flex items-center justify-center">
+          <img src="BSELLER/TEMPTATIONS CAT TREATS 85G.png" alt="Pedigree Can Wet Food 400g" class="h-full object-contain">
+        </div>
+        <div class="flex flex-col flex-grow p-4 text-center">
+          <h3 class="text-sm font-bold text-black uppercase">TEMPTATIONS CAT TREATS 85G</h3>
+        <div class="rating">⭐ 5.0</div>
+          <p class="text-black font-semibold mt-1">₱110.00 PHP</p>
+          <div class="mt-2">
+
+          <button class="add-to-cart-btn" onclick="openModal('TEMPTATIONS CAT TREATS 85G')">ADD TO CART</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="w-56 flex flex-col h-[420px]">
+        <div class="border border-gray-300 h-48 flex items-center justify-center">
+          <img src="BSELLER/DENTASTIX.webp" alt="Royal Canin Hair & Skin 85g" class="h-full object-contain">
+        </div>
+        <div class="flex flex-col flex-grow p-4 text-center">
+          <h3 class="text-sm font-bold text-black uppercase">DENTASTIX</h3>
+        <div class="rating">⭐ 5.0</div>
+          <p class="text-black font-semibold mt-1">₱120.00 PHP</p>
+          <div class="mt-2">
+
+          <button class="add-to-cart-btn" onclick="openModal('CIAO CHURU 56G')">ADD TO CART</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="w-56 flex flex-col h-[420px]">
+        <div class="border border-gray-300 h-48 flex items-center justify-center">
+          <img src="BSELLER/DENTALIFE CAT DENTAL TREATS.jpg" alt="Tuna in Jelly (2 cans)" class="h-full object-contain">
+        </div>
+        <div class="flex flex-col flex-grow p-4 text-center">
+          <h3 class="text-sm font-bold text-black uppercase">DENTALIFE CAT DENTAL TREATS</h3>
+        <div class="rating">⭐ 5.0</div>
+          <p class="text-black font-semibold mt-1">₱120.00 PHP</p>
+          <div class="mt-2">
+
+          <button class="add-to-cart-btn" onclick="openModal('DENTALIFE CAT DENTAL TREATS')">ADD TO CART</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="w-56 flex flex-col h-[420px]">
+        <div class="border border-gray-300 h-48 flex items-center justify-center">
+          <img src="BSELLER/PAWTITAS NATURAL CAT TREAT.jpg" alt="Dentastix 7s 110g" class="h-full object-contain">
+        </div>
+        <div class="flex flex-col flex-grow p-4 text-center">
+          <h3 class="text-sm font-bold text-black uppercase">PAWTITAS NATURAL CAT TREAT</h3>
+        <div class="rating">⭐ 5.0</div>
+          <p class="text-black font-semibold mt-1">₱135.00 PHP</p>
+          <div class="mt-2">
+
+          <button class="add-to-cart-btn" onclick="openModal('PAWTITAS NATURAL CAT TREAT')">ADD TO CART</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Hidden Product Set -->
+    <div id="set2" class="hidden flex justify-center gap-6 flex-wrap transition-all duration-500">
+      <!-- Product A -->
+      <div class="w-56 flex flex-col h-[420px]">
+        <div class="border border-gray-300 h-48 flex items-center justify-center">
+          <img src="BSELLER/PEDIGREE DENTASTIX DOG.webp" alt="Product A" class="h-full object-contain">
+        </div>
+        <div class="flex flex-col flex-grow p-4 text-center">
+          <h3 class="text-sm font-bold text-black uppercase">PEDIGREE DENTASTIX DOG</h3>
+        <div class="rating">⭐ 5.0</div>
+          <p class="text-black font-semibold mt-1">₱160.00 PHP</p>
+          <div class="mt-2">
+
+          <button class="add-to-cart-btn" onclick="openModal('PEDIGREE DENTASTIX DOG')">ADD TO CART</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-56 flex flex-col h-[420px]">
+        <div class="border border-gray-300 h-48 flex items-center justify-center">
+          <img src="BSELLER/ZOOMER ZING FRISBEE.jpg" alt="Product A" class="h-full object-contain">
+        </div>
+        <div class="flex flex-col flex-grow p-4 text-center">
+          <h3 class="text-sm font-bold text-black uppercase">ZOOMER ZING FRISBEE</h3>
+        <div class="rating">⭐ 5.0</div>
+          <p class="text-black font-semibold mt-1">₱99.00 PHP</p>
+          <div class="mt-2">
+
+          <button class="add-to-cart-btn" onclick="openModal('ZOOMER ZING FRISBEE')">ADD TO CART</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-56 flex flex-col h-[420px]">
+        <div class="border border-gray-300 h-48 flex items-center justify-center">
+          <img src="BSELLER/COZY CRITTER HIDEAWAY.jpg" alt="Product A" class="h-full object-contain">
+        </div>
+        <div class="flex flex-col flex-grow p-4 text-center">
+          <h3 class="text-sm font-bold text-black uppercase">COZY CRITTER HIDEAWAY</h3>
+        <div class="rating">⭐ 5.0</div>
+          <p class="text-black font-semibold mt-1">₱99.00 PHP</p>
+          <div class="mt-2">
+
+          <button class="add-to-cart-btn" onclick="openModal('COZY CRITTER HIDEAWAY')">ADD TO CART</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-56 flex flex-col h-[420px]">
+        <div class="border border-gray-300 h-48 flex items-center justify-center">
+          <img src="BSELLER/ABSOLUTE BITES DENTAL CHEW.jpg" alt="Product A" class="h-full object-contain">
+        </div>
+        <div class="flex flex-col flex-grow p-4 text-center">
+          <h3 class="text-sm font-bold text-black uppercase">ABSOLUTE BITES DENTAL CHEW</h3>
+        <div class="rating">⭐ 5.0</div>
+          <p class="text-black font-semibold mt-1">₱135.00 PHP</p>
+          <div class="mt-2">
+          <button class="add-to-cart-btn" onclick="openModal('ABSOLUTE BITES DENTAL CHEW')">ADD TO CART</button>
+          </div>
+        </div>
+      </div>
+     
+    </div>
+
+    <!-- Arrows -->
+    <div class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 cursor-pointer" id="prevBtn">
+      <i class="fas fa-chevron-left text-2xl text-black"></i>
+    </div>
+    <div class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 cursor-pointer" id="nextBtn">
+      <i class="fas fa-chevron-right text-2xl text-black"></i>
+    </div>
+
+  </div>
+
+
+
+
+
+<!-- BEST SELLERS Section .2 -->
+
+<h2 class="text-4xl font-extrabold mt-10 mb-10 text-center text-black">BEST SELLERS</h2>
+
+  <div class="relative max-w-7xl mx-auto">
+
+    <!-- Set 3 -->
+    <div id="set3" class="flex justify-center gap-6 flex-wrap transition-all duration-500">
+      
+      <!-- Product 1 -->
+      <div class="w-56 flex flex-col h-[420px]">
+        <div class="border border-gray-300 h-48 flex items-center justify-center">
+          <img src="BSELLER/2PAWSOME PLAYMATES.png" alt="New Product 1" class="h-full object-contain">
+        </div>
+        <div class="flex flex-col flex-grow p-4 text-center">
+          <h3 class="text-sm font-bold text-black uppercase">PAWSOME PLAYMATES</h3>
+        <div class="rating">⭐ 5.0</div>
+          <p class="text-black font-semibold mt-1">₱145.00 PHP</p>
+          <div class="mt-2">
+
+          <button class="add-to-cart-btn" onclick="openModal('PAWSOME PLAYMATES')">ADD TO CART</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="w-56 flex flex-col h-[420px]">
+        <div class="border border-gray-300 h-48 flex items-center justify-center">
+          <img src="BSELLER/2CHEW & CHASE FUN BALL.jpg" alt="New Product 2" class="h-full object-contain">
+        </div>
+        <div class="flex flex-col flex-grow p-4 text-center">
+          <h3 class="text-sm font-bold text-black uppercase">CHEW & CHASE FUN BALL</h3>
+        <div class="rating">⭐ 5.0</div>
+          <p class="text-black font-semibold mt-1">₱155.00 PHP</p>
+          <div class="mt-2">
+
+          <button class="add-to-cart-btn" onclick="openModal('CHEW & CHASE FUN BALL')">ADD TO CART</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="w-56 flex flex-col h-[420px]">
+        <div class="border border-gray-300 h-48 flex items-center justify-center">
+          <img src="BSELLER/2FURRY FRIENDS TUG ROPE.jpg" alt="New Product 3" class="h-full object-contain">
+        </div>
+        <div class="flex flex-col flex-grow p-4 text-center">
+          <h3 class="text-sm font-bold text-black uppercase">FURRY FRIENDS TUG ROPE</h3>
+        <div class="rating">⭐ 5.0</div>
+          <p class="text-black font-semibold mt-1">₱165.00 PHP</p>
+          <div class="mt-2">
+
+          <button class="add-to-cart-btn" onclick="openModal('FURRY FRIENDS TUG ROPE')">ADD TO CART</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="w-56 flex flex-col h-[420px]">
+        <div class="border border-gray-300 h-48 flex items-center justify-center">
+          <img src="BSELLER/2SLOWFEEDER PUZZLE DISH.jpg" alt="New Product 4" class="h-full object-contain">
+        </div>
+        <div class="flex flex-col flex-grow p-4 text-center">
+          <h3 class="text-sm font-bold text-black uppercase">SLOWFEEDER PUZZLE DISH</h3>
+        <div class="rating">⭐ 5.0</div>
+          <p class="text-black font-semibold mt-1">₱175.00 PHP</p>
+          <div class="mt-2">
+          <button class="add-to-cart-btn" onclick="openModal('SLOWFEEDER PUZZLE DISH')">ADD TO CART</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Set 4 -->
+    <div id="set4" class="hidden flex justify-center gap-6 flex-wrap transition-all duration-500">
+      
+      <!-- Product A -->
+      <div class="w-56 flex flex-col h-[420px]">
+        <div class="border border-gray-300 h-48 flex items-center justify-center">
+          <img src="BSELLER/3SNACKSTATION TREAT JAR.jpg" alt="New Product A" class="h-full object-contain">
+        </div>
+        <div class="flex flex-col flex-grow p-4 text-center">
+          <h3 class="text-sm font-bold text-black uppercase">SNACKSTATION TREAT JAR</h3>
+        <div class="rating">⭐ 5.0</div>
+          <p class="text-black font-semibold mt-1">₱188.00 PHP</p>
+          <div class="mt-2">
+
+          <button class="add-to-cart-btn" onclick="openModal('SNACKSTATION TREAT JAR')">ADD TO CART</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product B -->
+      <div class="w-56 flex flex-col h-[420px]">
+        <div class="border border-gray-300 h-48 flex items-center justify-center">
+          <img src="BSELLER/3SMILEBRIGHT DENTAL CHEWS.webp" alt="New Product B" class="h-full object-contain">
+        </div>
+        <div class="flex flex-col flex-grow p-4 text-center">
+          <h3 class="text-sm font-bold text-black uppercase">SMILEBRIGHT DENTAL CHEWS</h3>
+        <div class="rating">⭐ 5.0</div>
+          <p class="text-black font-semibold mt-1">₱132.00 PHP</p>
+          <div class="mt-2">
+          <button class="add-to-cart-btn" onclick="openModal('SMILEBRIGHT DENTAL CHEWS')">ADD TO CART</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product C -->
+      <div class="w-56 flex flex-col h-[420px]">
+        <div class="border border-gray-300 h-48 flex items-center justify-center">
+          <img src="BSELLER/3FRESHBREATH TOOTH GEL.jpg" alt="New Product C" class="h-full object-contain">
+        </div>
+        <div class="flex flex-col flex-grow p-4 text-center">
+          <h3 class="text-sm font-bold text-black uppercase">FRESHBREATH TOOTH GEL</h3>
+        <div class="rating">⭐ 5.0</div>
+          <p class="text-black font-semibold mt-1">₱199.00 PHP</p>
+          <div class="mt-2">
+          <button class="add-to-cart-btn" onclick="openModal('FRESHBREATH TOOTH GEL')">ADD TO CART</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product D -->
+      <div class="w-56 flex flex-col h-[420px]">
+        <div class="border border-gray-300 h-48 flex items-center justify-center">
+          <img src="BSELLER/3LITTLE LICKS CHICKEN SNACKS.jpg" alt="New Product D" class="h-full object-contain">
+        </div>
+        <div class="flex flex-col flex-grow p-4 text-center">
+          <h3 class="text-sm font-bold text-black uppercase">LITTLE LICKS CHICKEN SNACKS</h3>
+        <div class="rating">⭐ 5.0</div>
+          <p class="text-black font-semibold mt-1">₱160.00 PHP</p>
+          <div class="mt-2">
+          <button class="add-to-cart-btn" onclick="openModal('LITTLE LICKS CHICKEN SNACKS')">ADD TO CART</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carousel Arrows -->
+    <div class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 cursor-pointer" id="prevBtn2">
+      <i class="fas fa-chevron-left text-2xl text-black"></i>
+    </div>
+    <div class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 cursor-pointer" id="nextBtn2">
+      <i class="fas fa-chevron-right text-2xl text-black"></i>
+    </div>
+
+    <div id="addToCartModal" class="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center hidden">
+  <div class="bg-[#d48700] rounded-lg p-6 w-[90%] max-w-lg shadow-xl relative text-white font-bold">
+<button onclick="closeModal()" class="absolute top-2 right-3 text-white text-2xl font-bold hover:text-red-500">&times;</button>
+    <h2 class="text-2xl mb-4 text-left ">Select a Variation:</h2>
+    <div id="variationGrid" class="grid grid-cols-2 gap-4 mb-6">
+      <!-- Variation options inserted here dynamically -->
+    </div>
+
+    <!-- Updated quantity section -->
+    <div class="quantity-container">
+      <label for="quantity" class="quantity-label">Quantity</label>
+      <div class="quantity-controls">
+        <button type="button" onclick="changeQuantity(-1)" class="quantity-btn">−</button>
+        <input type="number" id="quantity" value="1" min="1" readonly class="quantity-input" />
+        <button type="button" onclick="changeQuantity(1)" class="quantity-btn">+</button>
+      </div>
+    </div>
+
+    <!-- Price indicator dito -->
+    <div id="priceIndicator" class="price-indicator mb-4 text-center text-white font-extrabold text-xl">
+      Price: ₱0.00 PHP
+    </div>
+
+    <button id="addToCartBtn" class="add-to-cart-btn">
+      Add to Cart
+    </button>
+  </div>
+</div>
+  </div>
+
+</section>
+
+
+
+<!-- Benefits Section -->
+<section class="bg-[#fff8dc] py-10">
+  <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-around items-center gap-8 md:gap-0">
+    
+    <!-- Benefit 1 -->
+    <div class="flex items-center space-x-4">
+      <i class="fas fa-shipping-fast text-4xl text-black"></i>
+      <h3 class="text-sm font-bold text-black leading-tight">
+        CONVENIENT<br>DELIVERY
+      </h3>
+    </div>
+
+    <!-- Benefit 2 -->
+    <div class="flex items-center space-x-4">
+      <i class="fas fa-paw text-4xl text-black"></i>
+      <h3 class="text-sm font-bold text-black leading-tight">
+        HELPING YOU<br>CHOOSE THE BEST
+      </h3>
+    </div>
+
+    <!-- Benefit 3 -->
+    <div class="flex items-center space-x-4">
+      <i class="fas fa-thumbs-up text-4xl text-black"></i>
+      <h3 class="text-sm font-bold text-black leading-tight">
+        AFFORDABLE<br>PRODUCTS
+      </h3>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- Newsletter Section -->
+<section class="bg-white py-16 px-6 text-center">
+  <h2 class="text-3xl md:text-4xl font-extrabold text-black mb-3">BE THE FIRST TO KNOW – FUR SURE</h2>
+  <p class="text-sm text-black mb-6 max-w-xl mx-auto">
+    Get exclusive updates, special offers, and the latest on your favorite pet products.
+  </p>
+  <form class="w-full max-w-xs mx-auto">
+    <div class="relative">
+      <input class="w-full rounded-full border border-gray-200 bg-gray-100 py-2 px-4 pr-10 text-sm text-black placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-black"
+        placeholder="Email" type="email" />
+      <button aria-label="Submit email"
+        class="absolute top-1/2 right-4 -translate-y-1/2 text-black text-xl font-bold" type="submit">
+        →
+      </button>
+    </div>
+  </form>
+</section>
+
+<!-- Footer -->
+<footer class="bg-[#ea9600] text-white py-10 px-6">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-10 md:gap-0">
+    <!-- Logo + Socials -->
+    <div class="flex flex-col gap-6 md:w-1/3">
+      <img src="E:\PETSHOP\images\LOGO.png" alt="Pawthentic logo" class="w-[150px] h-auto" />
+      <div class="flex gap-6 text-2xl">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-tiktok"></i></a>
+      </div>
+      <div class="flex flex-wrap gap-4 text-xs font-semibold underline">
+        <a href="#">Refund policy</a>
+        <a href="#">Privacy policy</a>
+        <a href="#">Terms of service</a>
+      </div>
+    </div>
+
+    <!-- Contact Us -->
+    <div class="md:w-1/3">
+      <h3 class="font-extrabold text-lg mb-4">CONTACT US</h3>
+      <ul class="space-y-3 text-sm font-semibold">
+        <li class="flex items-start gap-2">
+          <i class="fas fa-map-marker-alt mt-1"></i>
+          <span>1234 Main Street, Farmville, 1100, Philippines</span>
+        </li>
+        <li class="flex items-center gap-2">
+          <i class="fas fa-envelope"></i>
+          <a href="mailto:pawthentic2025@gmail.com" class="hover:underline">pawthentic2025@gmail.com</a>
+        </li>
+        <li class="flex items-center gap-2">
+          <i class="fas fa-phone-alt"></i>
+          <a href="tel:09123456789" class="hover:underline">09123456789</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- About Us -->
+    <div class="md:w-1/3">
+      <h3 class="font-extrabold text-lg mb-4">ABOUT US</h3>
+      <ul class="space-y-3 text-sm font-semibold">
+        <li><a href="#" class="hover:underline">Get to Know Us</a></li>
+        <li><a href="#" class="hover:underline">Our Commitment</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="text-[10px] text-black mt-8 text-center">
+    © 2025 Pawthentic. All rights reserved.
+  </div>
+</footer>
+
+<script>
+  // Product variations data
+  const productVariations = {
+    "TEMPTATIONS CAT TREATS 85G": ["Chicken Flavor", "Ocean Fish Flavor", "Beef Flavor"],
+    "CIAO CHURU 56G": ["Tuna", "Chicken", "Salmon"],
+    "DENTALIFE CAT DENTAL TREATS": ["Small", "Medium", "Large"],
+    "PAWTITAS NATURAL CAT TREAT": ["Chicken", "Salmon"],
+    "PEDIGREE DENTASTIX DOG": ["Puppy", "Adult"],
+    "ZOOMER ZING FRISBEE": ["Blue", "Red"],
+    "COZY CRITTER HIDEAWAY": ["Small", "Medium", "Large"],
+    "ABSOLUTE BITES DENTAL CHEW": ["Beef", "Chicken"],
+    "PAWSOME PLAYMATES": ["Blue", "Red", "Green"],
+    "CHEW & CHASE FUN BALL": ["Small", "Large"],
+    "FURRY FRIENDS TUG ROPE": ["Standard", "Extra Long"],
+    "SLOWFEEDER PUZZLE DISH": ["Small", "Medium", "Large"]
+  };
+
+  const productPriceMap = {
+    "TEMPTATIONS CAT TREATS 85G": {
+      "Chicken Flavor": 110,
+      "Ocean Fish Flavor": 115,
+      "Beef Flavor": 120
+    },
+    "CIAO CHURU 56G": {
+      "Tuna": 120,
+      "Chicken": 125,
+      "Salmon": 130
+    },
+    "DENTALIFE CAT DENTAL TREATS": {
+      "Small": 115,
+      "Medium": 125,
+      "Large": 135
+    },
+    "PAWTITAS NATURAL CAT TREAT": {
+      "Chicken": 135,
+      "Salmon": 140
+    },
+    "PEDIGREE DENTASTIX DOG": {
+      "Puppy": 150,
+      "Adult": 250
+    },
+    "ZOOMER ZING FRISBEE": {
+      "Blue": 90,
+      "Red": 90
+    },
+    "COZY CRITTER HIDEAWAY": {
+      "Small": 250,
+      "Medium": 300,
+      "Large": 350
+    },
+    "ABSOLUTE BITES DENTAL CHEW": {
+      "Beef": 130,
+      "Chicken": 130
+    },
+    "PAWSOME PLAYMATES": {
+      "Blue": 145,
+      "Red": 145,
+      "Green": 145
+    },
+    "CHEW & CHASE FUN BALL": {
+      "Small": 110,
+      "Large": 150
+    },
+    "FURRY FRIENDS TUG ROPE": {
+      "Standard": 140,
+      "Extra Long": 160
+    },
+    "SLOWFEEDER PUZZLE DISH": {
+      "Small": 180,
+      "Medium": 220,
+      "Large": 260
+    }
+  };
+
+  // Global state for cart
+  let selectedVariation = null;
+  let currentProductName = '';
+
+  // Initialize all functionality when DOM is ready
+  document.addEventListener('DOMContentLoaded', () => {
+    initializeBannerCarousel();
+    initializeAddToCart();
+    initializeBestSellers();
+    initializeAccountDropdown();
+  });
+
+  // Banner carousel functionality
+  function initializeBannerCarousel() {
+    const slider = document.getElementById('slider');
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+    const dotsContainer = document.getElementById('carousel-dots');
+    
+    if (slider && prev && next && dotsContainer) {
+      let slideIndex = 0;
+      const totalSlides = 2;
+      let isAnimating = false;
+
+      // Generate navigation dots
+      dotsContainer.innerHTML = '';
+      const navigationDots = Array.from({ length: totalSlides }, (_, i) => {
+        const dot = document.createElement('span');
+        dot.classList.add('h-3', 'w-3', 'rounded-full', 'inline-block', 'cursor-pointer');
+        dot.classList.add(i === 0 ? 'bg-orange-500' : 'bg-gray-400');
+        dotsContainer.appendChild(dot);
+        return dot;
+      });
+
+      function updateNavigation() {
+        navigationDots.forEach((dot, idx) => {
+          dot.classList.remove('bg-orange-500', 'bg-gray-400');
+          dot.classList.add(idx === slideIndex ? 'bg-orange-500' : 'bg-gray-400');
+        });
+      }
+
+      function showSlide() {
+        if (isAnimating) return;
+        isAnimating = true;
+        slider.style.transform = `translateX(-${slideIndex * 100}%)`;
+        updateNavigation();
+        setTimeout(() => { isAnimating = false; }, 700);
+      }
+
+      function nextSlide() {
+        slideIndex = (slideIndex + 1) % totalSlides;
+        showSlide();
+      }
+
+      function prevSlide() {
+        slideIndex = (slideIndex - 1 + totalSlides) % totalSlides;
+        showSlide();
+      }
+
+      next.addEventListener('click', nextSlide);
+      prev.addEventListener('click', prevSlide);
+      
+      navigationDots.forEach((dot, idx) => {
+        dot.addEventListener('click', () => {
+          if (isAnimating || slideIndex === idx) return;
+          slideIndex = idx;
+          showSlide();
+        });
+      });
+
+      // Auto-slide every 4 seconds
+      setInterval(nextSlide, 4000);
+    }
+  }
+
+  // Add to cart functionality
+  function initializeAddToCart() {
+    const addToCartBtn = document.getElementById("addToCartBtn");
+    if (addToCartBtn) {
+      addToCartBtn.addEventListener("click", () => {
+        if (!selectedVariation) {
+          alert("✨ Hey there! Don't forget to select a variation! 🎀 Your pet deserves the best! 🐶🐱");
+          return;
+        }
+
+        const quantity = parseInt(document.getElementById("quantity").value);
+        const price = productPriceMap[currentProductName]?.[selectedVariation] || 0;
+        let cart = JSON.parse(localStorage.getItem("pawthenticCart")) || [];
+
+        const existingIndex = cart.findIndex(
+          item => item.productName === currentProductName && item.variation === selectedVariation
+        );
+
+        if (existingIndex !== -1) {
+          cart[existingIndex].quantity += quantity;
+        } else {
+          cart.push({
+            productName: currentProductName,
+            variation: selectedVariation,
+            price,
+            quantity,
+          });
+        }
+
+        localStorage.setItem("pawthenticCart", JSON.stringify(cart));
+        alert(
+          `🐾 Yay! You've added to your Pawthentic cart:\n💖 Product: ${currentProductName}\n✨ Variation: ${selectedVariation}\n🎉 Quantity: ${quantity}\n\nThanks fur shopping with Pawthentic! 🐶🐱`
+        );
+
+        closeModal();
+      });
+    }
+  }
+
+  // Best sellers carousel functionality
+  function initializeBestSellers() {
+    const set1 = document.getElementById('set1');
+    const set2 = document.getElementById('set2');
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+
+    if (set1 && set2 && nextBtn && prevBtn) {
+      nextBtn.addEventListener('click', () => {
+        set1.classList.add('hidden');
+        set2.classList.remove('hidden');
+      });
+
+      prevBtn.addEventListener('click', () => {
+        set2.classList.add('hidden');
+        set1.classList.remove('hidden');
+      });
+    }
+
+    const set3 = document.getElementById('set3');
+    const set4 = document.getElementById('set4');
+    const nextBtn2 = document.getElementById('nextBtn2');
+    const prevBtn2 = document.getElementById('prevBtn2');
+
+    if (set3 && set4 && nextBtn2 && prevBtn2) {
+      nextBtn2.addEventListener('click', () => {
+        set3.classList.add('hidden');
+        set4.classList.remove('hidden');
+      });
+
+      prevBtn2.addEventListener('click', () => {
+        set4.classList.add('hidden');
+        set3.classList.remove('hidden');
+      });
+    }
+  }
+
+  // Account dropdown functionality
+  function initializeAccountDropdown() {
+    const accountBtn = document.getElementById("accountBtn");
+    const accountDropdown = document.getElementById("accountDropdown");
+
+    if (accountBtn && accountDropdown) {
+      accountBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const expanded = accountBtn.getAttribute("aria-expanded") === "true" || false;
+        accountBtn.setAttribute("aria-expanded", !expanded);
+        accountDropdown.classList.toggle("hidden");
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!accountDropdown.contains(e.target) && !accountBtn.contains(e.target)) {
+          accountDropdown.classList.add("hidden");
+          accountBtn.setAttribute("aria-expanded", false);
+        }
+      });
+    }
+  }
+
+  // Modal functionality
+  function openModal(productName) {
+    const modal = document.getElementById("addToCartModal");
+    const variationGrid = document.getElementById("variationGrid");
+    const quantityInput = document.getElementById("quantity");
+    const priceIndicator = document.getElementById("priceIndicator");
+
+    // Clear previous content and reset
+    variationGrid.innerHTML = "";
+    selectedVariation = null;
+    quantityInput.value = 1;
+    priceIndicator.textContent = "Price: ₱0.00 PHP";
+
+    currentProductName = productName;
+    const variations = productVariations[productName] || [];
+
+    variations.forEach((variation) => {
+      const optionDiv = document.createElement("div");
+      optionDiv.className = "variation-option";
+
+      const img = document.createElement("img");
+      img.src = `BSELLER/${productName.replace(/ /g, '_')}.png`;
+      img.alt = variation;
+      img.onerror = () => img.src = "https://via.placeholder.com/50";
+
+      const label = document.createElement("span");
+      label.textContent = variation.toUpperCase();
+
+      optionDiv.appendChild(img);
+      optionDiv.appendChild(label);
+
+      optionDiv.addEventListener("click", () => {
+        document.querySelectorAll("#variationGrid .variation-option").forEach(el => el.classList.remove("selected"));
+        optionDiv.classList.add("selected");
+        selectedVariation = variation;
+
+        const price = productPriceMap[currentProductName]?.[selectedVariation] || 0;
+        priceIndicator.textContent = `Price: ₱${price.toFixed(2)} PHP`;
+      });
+
+      variationGrid.appendChild(optionDiv);
+    });
+
+    modal.classList.remove("hidden");
+  }
+
+  function closeModal() {
+    const modal = document.getElementById("addToCartModal");
+    if (modal) {
+      modal.classList.add("hidden");
+    }
+  }
+
+  function changeQuantity(delta) {
+    const quantityInput = document.getElementById("quantity");
+    if (quantityInput) {
+      let current = parseInt(quantityInput.value) || 1;
+      current += delta;
+      if (current < 1) current = 1;
+      quantityInput.value = current;
+    }
+  }
+
+  // Make functions globally available
+  window.openModal = openModal;
+  window.closeModal = closeModal;
+  window.changeQuantity = changeQuantity;
+</script>
+
+
+  </body>
+ </html> 

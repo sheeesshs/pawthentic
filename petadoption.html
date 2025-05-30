@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pet Adoption | Pawthentic</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #ffffff; /* Light background */
+      margin: 0;
+      padding: 0;
+      color: #222;
+      overflow-x: hidden; /* Hide horizontal scroll */
+      font-weight: normal;
+    }
+
+    .popup-bubble {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      margin-left: 5px;
+      width: 400px;
+      background-color: #d48700;
+      color: white;
+      font-weight: normal;
+      font-family: "Poppins", sans-serif;
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      border-radius: 20px;
+      padding: 1.2rem 2rem;
+      box-shadow: 3px 3px 6px rgb(0 0 0 / 0.2);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .popup-bubble::before {
+      content: "";
+      position: absolute;
+      top: 1px;
+      left: -25px;
+      width: 0;
+      height: 0;
+      border-top: 30px solid transparent;
+      border-bottom: 30px solid transparent;
+      border-right: 40px solid #d48700;
+      border-radius: 3px;
+    }
+
+    .popup-bubble p {
+      margin: 0;
+      width: 100%;
+      text-align: center;
+      letter-spacing: 2px;
+      font-weight: normal;
+      font-size: 1.6rem;
+      white-space: nowrap;
+    }
+
+    .popup-bubble .flex {
+      display: flex;
+      gap: 2rem;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .popup-bubble a {
+      color: white;
+      text-decoration: none;
+      font-weight: normal;
+      font-size: 2rem;
+      padding: 0.6rem 2rem;
+      border-radius: 12px;
+      background: transparent;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+    }
+
+    .popup-bubble a:hover {
+      background-color: white;
+      color: #d48700;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+  <!-- Top Bar -->
+  <div class="bg-orange-500 py-2 px-4 flex justify-between items-center">
+    <div class="flex space-x-4 text-white text-xl">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-tiktok"></i></a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="relative z-40 bg-amber-100 py-4 px-6 flex justify-between items-center">
+    <div class="flex items-center space-x-6">
+      <div class="text-3xl text-orange-500 flex items-center">
+        <a href="index.html">
+          <img
+            src="images/LOGO.png"
+            alt="Pawthentic Logo"
+            class="h-12 w-auto mr-2"
+          />
+        </a>
+      </div>
+
+      <nav class="hidden md:flex space-x-6 text-black text-lg items-center">
+        <a href="index.html" class="text-black text-lg">
+          <i class="fas fa-home"></i>
+        </a>
+
+        <!-- SERVICES DROPDOWN -->
+        <div class="group">
+          <button class="flex items-center focus:outline-none group-hover:text-orange-500">
+            SERVICES
+            <svg
+              class="ml-1 w-4 h-4 fill-current"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M5.25 7.5l4.5 4.5 4.5-4.5h-9z" />
+            </svg>
+          </button>
+          <div
+            class="absolute left-0 mt-2 w-[2000px] bg-white bg-opacity-80 border rounded-md shadow-lg z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all p-6"
+          >
+            <a href="PETGROOMING.html" class="px-4 py-3 text-lg">
+              Pet Grooming
+            </a>
+            <a href="petadoption.html" class="block px-4 py-3 text-lg">
+              Pet Adoption Assistance
+            </a>
+          </div>
+        </div>
+
+        <!-- PRODUCTS Dropdown -->
+        <div class="group">
+          <button
+            class="flex items-center focus:outline-none group-hover:text-orange-500 text-black"
+          >
+            PRODUCTS
+            <svg
+              class="ml-1 w-4 h-4 fill-current"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M5.25 7.5l4.5 4.5 4.5-4.5h-9z" />
+            </svg>
+          </button>
+
+          <div
+            class="absolute left-0 mt-2 w-full max-w-[2000px] bg-white bg-opacity-80 rounded-md shadow-lg z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all p-4 flex justify-center gap-4"
+          >
+            <!-- Column 1 -->
+            <div class="min-w-[220px]">
+              <h3 class="text-black mb-2">FOOD & TREATS</h3>
+              <div class="flex flex-col space-y-2">
+                <div class="relative">
+                  <a
+                    href="wetfood.html"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="wetfoods"
+                    >Wet Foods</a
+                  >
+                  <div
+                    id="wetfoods"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="wetfood-cat.html">CAT</a>
+                      <a href="wetfood-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <a
+                    href="dryfood.html"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="dryfoods"
+                    >Dry Foods</a
+                  >
+                  <div
+                    id="dryfoods"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="dryfood-cat.html">CAT</a>
+                      <a href="dryfood-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <a
+                    href="treats.html"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="treats"
+                    >Treats</a
+                  >
+                  <div
+                    id="treats"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="treats-cat.html">CAT</a>
+                      <a href="treats-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Column 2 -->
+            <div class="min-w-[220px]">
+              <h3 class="text-black mb-2">TOYS & ACCESSORIES</h3>
+              <div class="flex flex-col space-y-2">
+                <div class="relative">
+                  <a href="toys.html" class="subcat-toggle block cursor-pointer" data-id="toys"
+                    >Toys</a
+                  >
+                  <div
+                    id="toys"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="toys-cat.html">CAT</a>
+                      <a href="toys-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <a href="feeding-supplies.html" class="subcat-toggle block cursor-pointer" data-id="feeding-supplies"
+                    >Feeding Supplies</a
+                  >
+                  <div
+                    id="feeding-supplies"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="feeding-supplies-cat.html">CAT</a>
+                      <a href="feeding-supplies-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <a href="collars-leash-harness.html" class="subcat-toggle block cursor-pointer" data-id="collars-leash-harness"
+                    >Collars, Leash & Harness</a
+                  >
+                  <div
+                    id="collars-leash-harness"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="collars-cat.html">CAT</a>
+                      <a href="collars-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <a href="carriers.html" class="subcat-toggle block cursor-pointer" data-id="carriers"
+                    >Carriers</a
+                  >
+                  <div
+                    id="carriers"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="carriers-cat.html">CAT</a>
+                      <a href="carriers-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Column 3 -->
+            <div class="min-w-[220px]">
+              <h3 class="text-black mb-2">GROOMING & HYGIENE</h3>
+              <div class="flex flex-col space-y-2">
+                <div class="relative">
+                  <a href="ear-and-eye-care.html" class="subcat-toggle block cursor-pointer" data-id="ear-and-eye-care"
+                    >Ear and Eye Care</a
+                  >
+                  <div
+                    id="ear-and-eye-care"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="ear-eye-cat.html">CAT</a>
+                      <a href="ear-eye-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <a href="oral-care.html" class="subcat-toggle block cursor-pointer" data-id="oral-care"
+                    >Oral Care</a
+                  >
+                  <div
+                    id="oral-care"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="oral-care-cat.html">CAT</a>
+                      <a href="oral-care-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <a href="bath-and-grooming-essentials.html" class="subcat-toggle block cursor-pointer" data-id="bath-and-grooming-essentials"
+                    >Bath and Grooming Essentials</a
+                  >
+                  <div
+                    id="bath-and-grooming-essentials"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="bath-grooming-cat.html">CAT</a>
+                      <a href="bath-grooming-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Column 4 -->
+            <div class="min-w-[220px]">
+              <h3 class="text-black mb-2">CLEANING & POTTY</h3>
+              <div class="flex flex-col space-y-2">
+                <div class="relative">
+                  <a href="#" class="subcat-toggle block cursor-pointer" data-id="cleaning-supplies"
+                    >Cleaning Supplies</a
+                  >
+                  <div
+                    id="cleaning-supplies"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="cleaning-supplies-cat.html">CAT</a>
+                      <a href="cleaning-supplies-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <a href="#" class="subcat-toggle block cursor-pointer" data-id="potty-essentials"
+                    >Potty Essentials</a
+                  >
+                  <div
+                    id="potty-essentials"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="potty-essentials-cat.html">CAT</a>
+                      <a href="potty-essentials-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Search + Icons -->
+    <div class="flex items-center space-x-4">
+      <div class="relative">
+        <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
+        <input
+          type="text"
+          placeholder="Search"
+          class="rounded-full border border-black pl-10 pr-4 py-2 focus:outline-none w-full text-gray-800"
+        />
+      </div>
+      <a href="cart.html"><i class="fas fa-shopping-cart text-2xl"></i></a>
+      <a href="#"><i class="fas fa-user text-2xl"></i></a>
+      <a href="about-us.html" class="text-black text-lg hover:text-orange-500 font-semibold">ABOUT US</a>
+    </div>
+  </header>
+
+  <!-- Pet Adoption Assistance Section -->
+  <section class="py-16 text-center">
+    <!-- Section Title -->
+    <h2 class="text-4xl text-black mb-4">PET ADOPTION ASSISTANCE</h2>
+    <p class="text-lg text-gray-600 mb-12">
+      Bringing loving pets and caring families together, making every adoption a heartwarming journey.
+    </p>
+
+    <!-- Cats for Adoption Carousel -->
+    <div class="mb-12">
+      <h2 class="text-4xl mb-8 text-center text-black">CATS FOR ADOPTION</h2>
+
+      <!-- Carousel Wrapper -->
+      <div class="relative max-w-7xl mx-auto">
+        <!-- Set 1 -->
+        <div
+          id="catSet1"
+          class="flex justify-center space-x-6 transition-all duration-500"
+        >
+          <!-- Cat 1 -->
+          <div
+            class="bg-white shadow-lg rounded-lg w-64 flex flex-col justify-between"
+          >
+            <img
+              src="CATS ADOPT/1-CAT.jpeg"
+              alt="Adoptable Cat 1"
+              class="w-full h-48 object-cover rounded-t-lg"
+            />
+            <div class="flex flex-col justify-between flex-grow p-4 text-center">
+              <div>
+                <h3 class="text-lg text-black">LUNA</h3>
+                <p class="text-sm text-gray-600">Female | Approx. 2 years old</p>
+              </div>
+              <button
+                class="mt-4 bg-blue-600 text-white py-2 w-full rounded"
+                onclick="openModal('LUNA')"
+              >
+                ADOPT
+              </button>
+            </div>
+          </div>
+
+          <!-- Cat 2 -->
+          <div
+            class="bg-white shadow-lg rounded-lg w-64 flex flex-col justify-between"
+          >
+            <img
+              src="CATS ADOPT/2-CAT.jpg"
+              alt="Adoptable Cat 2"
+              class="w-full h-48 object-cover rounded-t-lg"
+            />
+            <div class="flex flex-col justify-between flex-grow p-4 text-center">
+              <div>
+                <h3 class="text-lg text-black">MILO</h3>
+                <p class="text-sm text-gray-600">Male | Approx. 3 years old</p>
+              </div>
+              <button
+                class="mt-4 bg-blue-600 text-white py-2 w-full rounded"
+                onclick="openModal('MILO')"
+              >
+                ADOPT
+              </button>
+            </div>
+          </div>
+
+          <!-- Cat 3 -->
+          <div class="bg-white rounded-lg w-64 flex flex-col justify-between">
+            <img
+              src="CATS ADOPT/3-CAT.jpg"
+              alt="Adoptable Cat 3"
+              class="w-full h-48 border-black object-cover rounded-t-lg"
+            />
+            <div class="flex flex-col justify-between flex-grow p-4 text-center">
+              <div>
+                <h3 class="text-lg text-black">WHISKERS</h3>
+                <p class="text-sm text-gray-600">Male | Approx. 4 years old</p>
+              </div>
+              <button
+                class="mt-4 bg-blue-600 text-white py-2 w-full rounded"
+                onclick="openModal('WHISKERS')"
+              >
+                ADOPT
+              </button>
+            </div>
+          </div>
+
+          <!-- Cat 4 -->
+          <div
+            class="bg-white shadow-lg rounded-lg w-64 flex flex-col justify-between"
+          >
+            <img
+              src="CATS ADOPT/4-CAT.jpg"
+              alt="Adoptable Cat 4"
+              class="w-full h-48 object-cover rounded-t-lg"
+            />
+            <div class="flex flex-col justify-between flex-grow p-4 text-center">
+              <div>
+                <h3 class="text-lg text-black">PEACHES</h3>
+                <p class="text-sm text-gray-600">Female | Approx. 1 year old</p>
+              </div>
+              <button
+                class="mt-4 bg-blue-600 text-white py-2 w-full rounded"
+                onclick="openModal('PEACHES')"
+              >
+                ADOPT
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Set 2 (Hidden) -->
+        <div
+          id="catSet2"
+          class="hidden flex justify-center space-x-6 transition-all duration-500"
+        >
+          <!-- Cat 5 -->
+          <div class="bg-white shadow-lg rounded-lg w-64">
+            <img
+              src="CATS ADOPT/5-CAT.jpg"
+              alt="Adoptable Cat 5"
+              class="w-full h-48 object-cover rounded-t-lg"
+            />
+            <div class="p-4 text-center">
+              <h3 class="text-lg text-black">SHADOW</h3>
+              <p class="text-sm text-gray-600">Male | Approx. 2 years old</p>
+              <button
+                class="mt-4 bg-blue-600 text-white py-2 w-full rounded"
+                onclick="openModal('SHADOW')"
+              >
+                ADOPT
+              </button>
+            </div>
+          </div>
+
+          <!-- Cat 6 -->
+          <div class="bg-white shadow-lg rounded-lg w-64">
+            <img
+              src="CATS ADOPT/6-CAT.jpg"
+              alt="Adoptable Cat 6"
+              class="w-full h-48 object-cover rounded-t-lg"
+            />
+            <div class="p-4 text-center">
+              <h3 class="text-lg text-black">GINGER</h3>
+              <p class="text-sm text-gray-600">Female | Approx. 3 years old</p>
+              <button
+                class="mt-4 bg-blue-600 text-white py-2 w-full rounded"
+                onclick="openModal('GINGER')"
+              >
+                ADOPT
+              </button>
+            </div>
+          </div>
+
+          <!-- Cat 7 -->
+          <div class="bg-white shadow-lg rounded-lg w-64">
+            <img
+              src="E:\PETSHOP\CATS ADOPT\7-CAT.jpg"
+              alt="Adoptable Cat 7"
+              class="w-full h-48 object-cover rounded-t-lg"
+            />
+            <div class="p-4 text-center">
+              <h3 class="text-lg text-black">SALEM</h3>
+              <p class="text-sm text-gray-600">Male | Approx. 1.5 years old</p>
+              <button
+                class="mt-4 bg-blue-600 text-white py-2 w-full rounded"
+                onclick="openModal('SALEM')"
+              >
+                ADOPT
+              </button>
+            </div>
+          </div>
+
+          <!-- Cat 8 -->
+          <div class="bg-white shadow-lg rounded-lg w-64">
+            <img
+              src="CATS ADOPT/8-CAT.jpg"
+              alt="Adoptable Cat 8"
+              class="w-full h-48 object-cover rounded-t-lg"
+            />
+            <div class="p-4 text-center">
+              <h3 class="text-lg text-black">COOKIE</h3>
+              <p class="text-sm text-gray-600">Female | Approx. 2.5 years old</p>
+              <button
+                class="mt-4 bg-blue-600 text-white py-2 w-full rounded"
+                onclick="openModal('COOKIE')"
+              >
+                ADOPT
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Arrows -->
+        <div
+          class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 cursor-pointer"
+          id="catPrev"
+        >
+          <i class="fas fa-chevron-left text-2xl text-black"></i>
+        </div>
+        <div
+          class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 cursor-pointer"
+          id="catNext"
+        >
+          <i class="fas fa-chevron-right text-2xl text-black"></i>
+        </div>
+      </div>
+
+      <!-- Dogs for Adoption Carousel -->
+      <div>
+        <div class="mt-10">
+          <h2 class="text-4xl mb-8 text-center text-black">DOGS FOR ADOPTION</h2>
+          <div class="relative flex justify-center items-center"></div>
+          <!-- Carousel Wrapper -->
+          <div class="relative max-w-7xl mx-auto">
+            <!-- Set 1 -->
+            <div
+              id="dogSet1"
+              class="flex justify-center space-x-6 transition-all duration-500"
+            >
+              <!-- Dog 1 -->
+              <div class="bg-white shadow-lg rounded-lg w-64 flex flex-col justify-between">
+                <img
+                  src="DOG FOR ADOPT/1-DOG.jpg"
+                  alt="Adoptable Dog 1"
+                  class="w-full h-48 object-cover rounded-t-lg"
+                />
+                <div class="flex flex-col justify-between flex-grow p-4 text-center">
+                  <div>
+                    <h3 class="text-lg text-black">BUDDY</h3>
+                    <p class="text-sm text-gray-600">Male | Approx. 3 years old</p>
+                  </div>
+                  <button
+                    class="mt-4 bg-blue-600 text-white py-2 w-full rounded"
+                    onclick="openModal('BUDDY')"
+                  >
+                    ADOPT
+                  </button>
+                </div>
+              </div>
+
+              <!-- Dog 2 -->
+              <div class="bg-white shadow-lg rounded-lg w-64 flex flex-col justify-between">
+                <img
+                  src="DOG FOR ADOPT/2-DOG.jpg"
+                  alt="Adoptable Dog 2"
+                  class="w-full h-48 object-cover rounded-t-lg"
+                />
+                <div class="flex flex-col justify-between flex-grow p-4 text-center">
+                  <div>
+                    <h3 class="text-lg text-black">MAX</h3>
+                    <p class="text-sm text-gray-600">Male | Approx. 4 years old</p>
+                  </div>
+                  <button
+                    class="mt-4 bg-blue-600 text-white py-2 w-full rounded"
+                    onclick="openModal('MAX')"
+                  >
+                    ADOPT
+                  </button>
+                </div>
+              </div>
+
+              <!-- Dog 3 -->
+              <div class="bg-white shadow-lg rounded-lg w-64 flex flex-col justify-between">
+                <img
+                  src="DOG FOR ADOPT/3-DOG.jpg"
+                  alt="Adoptable Dog 3"
+                  class="w-full h-48 object-cover rounded-t-lg"
+                />
+                <div class="flex flex-col justify-between flex-grow p-4 text-center">
+                  <div>
+                    <h3 class="text-lg text-black">BELLA</h3>
+                    <p class="text-sm text-gray-600">Female | Approx. 2 years old</p>
+                  </div>
+                  <button
+                    class="mt-4 bg-blue-600 text-white py-2 w-full rounded"
+                    onclick="openModal('BELLA')"
+                  >
+                    ADOPT
+                  </button>
+                </div>
+              </div>
+
+              <!-- Dog 4 -->
+              <div class="bg-white shadow-lg rounded-lg w-64 flex flex-col justify-between">
+                <img
+                  src="DOG FOR ADOPT/4-DOG.jpg"
+                  alt="Adoptable Dog 4"
+                  class="w-full h-48 object-cover rounded-t-lg"
+                />
+                <div class="flex flex-col justify-between flex-grow p-4 text-center">
+                  <div>
+                    <h3 class="text-lg text-black">ROXY</h3>
+                    <p class="text-sm text-gray-600">Female | Approx. 1.5 years old</p>
+                  </div>
+                  <button
+                    class="mt-4 bg-blue-600 text-white py-2 w-full rounded"
+                    onclick="openModal('ROXY')"
+                  >
+                    ADOPT
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Set 2 (Hidden) -->
+            <div
+              id="dogSet2"
+              class="hidden flex justify-center space-x-6 transition-all duration-500"
+            >
+              <!-- Dog 5 -->
+              <div class="bg-white shadow-lg rounded-lg w-64">
+                <img
+                  src="DOG FOR ADOPT/5-DOG.jpg"
+                  alt="Adoptable Dog 5"
+                  class="w-full h-48 object-cover rounded-t-lg"
+                />
+                <div class="p-4 text-center">
+                  <h3 class="text-lg text-black">MILO</h3>
+                  <p class="text-sm text-gray-600">Male | Approx. 3 years old</p>
+                  <button
+                    class="mt-4 bg-blue-600 text-white py-2 w-full rounded"
+                    onclick="openModal('MILO')"
+                  >
+                    ADOPT
+                  </button>
+                </div>
+              </div>
+
+              <!-- Dog 6 -->
+              <div class="bg-white shadow-lg rounded-lg w-64">
+                <img
+                  src="DOG FOR ADOPT/6-DOG.jpg"
+                  alt="Adoptable Dog 6"
+                  class="w-full h-48 object-cover rounded-t-lg"
+                />
+                <div class="p-4 text-center">
+                  <h3 class="text-lg text-black">LUCY</h3>
+                  <p class="text-sm text-gray-600">Female | Approx. 2 years old</p>
+                  <button
+                    class="mt-4 bg-blue-600 text-white py-2 w-full rounded"
+                    onclick="openModal('LUCY')"
+                  >
+                    ADOPT
+                  </button>
+                </div>
+              </div>
+
+              <!-- Dog 7 -->
+              <div class="bg-white shadow-lg rounded-lg w-64">
+                <img
+                  src="DOG FOR ADOPT/7-DOG.jpg"
+                  alt="Adoptable Dog 7"
+                  class="w-full h-48 object-cover rounded-t-lg"
+                />
+                <div class="p-4 text-center">
+                  <h3 class="text-lg text-black">CHARLIE</h3>
+                  <p class="text-sm text-gray-600">Male | Approx. 4 years old</p>
+                  <button
+                    class="mt-4 bg-blue-600 text-white py-2 w-full rounded"
+                    onclick="openModal('CHARLIE')"
+                  >
+                    ADOPT
+                  </button>
+                </div>
+              </div>
+
+              <!-- Dog 8 -->
+              <div class="bg-white shadow-lg rounded-lg w-64">
+                <img
+                  src="DOG FOR ADOPT/8-DOG.jpg"
+                  alt="Adoptable Dog 8"
+                  class="w-full h-48 object-cover rounded-t-lg"
+                />
+                <div class="p-4 text-center">
+                  <h3 class="text-lg text-black">DOLLY</h3>
+                  <p class="text-sm text-gray-600">Female | Approx. 2 years old</p>
+                  <button
+                    class="mt-4 bg-blue-600 text-white py-2 w-full rounded"
+                    onclick="openModal('DOLLY')"
+                  >
+                    ADOPT
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Navigation Arrows -->
+            <div
+              class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 cursor-pointer"
+              id="dogPrev"
+            >
+              <i class="fas fa-chevron-left text-2xl text-black"></i>
+            </div>
+            <div
+              class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 cursor-pointer"
+              id="dogNext"
+            >
+              <i class="fas fa-chevron-right text-2xl text-black"></i>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How to Adopt + FAQ Section -->
+      <section
+        class="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 gap-8"
+      >
+        <!-- How to Adopt a Pet -->
+        <div
+          class="bg-[#fff9e5] border border-gray-300 rounded-lg p-6 shadow-md"
+        >
+          <h3 class="text-xl mb-4 text-center text-black">
+            HOW TO ADOPT A PET
+          </h3>
+          <ol class="space-y-4">
+            <li class="flex items-start">
+              <div
+                class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3"
+              >
+                1
+              </div>
+              <div>
+                <p class="text-black">Fill out the adoption form</p>
+                <p class="text-gray-700">
+                  Provide details about your home and lifestyle.
+                </p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <div
+                class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3"
+              >
+                2
+              </div>
+              <div>
+                <p class="text-black">Attend a screening interview</p>
+                <p class="text-gray-700">Meet with our team to find the right match.</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <div
+                class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3"
+              >
+                3
+              </div>
+              <div>
+                <p class="text-black">Meet your potential pet</p>
+                <p class="text-gray-700">
+                  Spend time together to ensure a good fit.
+                </p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <div
+                class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3"
+              >
+                4
+              </div>
+              <div>
+                <p class="text-black">Complete the adoption process</p>
+                <p class="text-gray-700">Wait for vet clearance and pay the adoption fee.</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <div
+                class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3"
+              >
+                5
+              </div>
+              <div>
+                <p class="text-black">Bring your new pet home!</p>
+                <p class="text-gray-700">Welcome them with love and care.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <!-- FAQs -->
+        <div
+          class="bg-[#fff9e5] border border-gray-300 rounded-lg p-6 shadow-md"
+        >
+          <h3 class="text-xl mb-4 text-center text-black">FAQs</h3>
+          <div class="space-y-4 text-black">
+            <div>
+              <p>Can I surrender my pet for adoption?</p>
+              <p class="text-gray-700">
+                We currently do not accept pet surrenders. Instead, we encourage
+                responsible rehoming by finding a loving new home through trusted
+                networks and pet adoption communities.
+              </p>
+            </div>
+            <div>
+              <p>Are all pets vaccinated before adoption?</p>
+              <p class="text-gray-700">
+                Yes! All our pets receive necessary vaccinations and vet checkups
+                before they are cleared for adoption.
+              </p>
+            </div>
+            <div>
+              <p>Can I adopt more than one pet?</p>
+              <p class="text-gray-700">
+                Yes, but we assess each adoption to ensure you can provide the best
+                care and environment for multiple pets.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Adoption Form Modal -->
+      <div
+        id="adoptModal"
+        class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden flex justify-center items-center min-h-screen"
+      >
+        <div class="bg-white p-8 rounded-lg w-96">
+          <h2
+            class="text-2xl mb-4 text-orange-500"
+            id="modalTitle"
+          >
+            Adopt a Pet
+          </h2>
+          <form id="adoptForm">
+            <div class="mb-4">
+              <label
+                for="name"
+                class="block text-lg mb-2 text-gray-700"
+                >Full Name</label
+              >
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="w-full p-2 border rounded-md focus:ring-2 focus:ring-orange-500"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <label
+                for="email"
+                class="block text-lg mb-2 text-gray-700"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="w-full p-2 border rounded-md focus:ring-2 focus:ring-orange-500"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <label
+                for="phone"
+                class="block text-lg mb-2 text-gray-700"
+                >Phone Number</label
+              >
+              <input
+                type="text"
+                id="phone"
+                name="phone"
+                class="w-full p-2 border rounded-md focus:ring-2 focus:ring-orange-500"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <label
+                for="message"
+                class="block text-lg mb-2 text-gray-700"
+                >Why do you want to adopt this pet?</label
+              >
+              <textarea
+                id="message"
+                name="message"
+                class="w-full p-2 border rounded-md focus:ring-2 focus:ring-orange-500"
+                required
+              ></textarea>
+            </div>
+            <div class="flex justify-between">
+              <button
+                type="submit"
+                class="bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600 transition"
+              >
+                Submit
+              </button>
+              <button
+                type="button"
+                id="closeModal"
+                class="ml-4 bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-600 transition"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+  <script>
+    // Subcategory toggle for CAT/DOG popups
+    document.addEventListener("DOMContentLoaded", () => {
+      const toggles = document.querySelectorAll(".subcat-toggle");
+
+      toggles.forEach((toggle) => {
+        toggle.addEventListener("click", (e) => {
+          e.preventDefault();
+          const id = toggle.getAttribute("data-id");
+          const popup = document.getElementById(id);
+
+          // Toggle popup visibility
+          if (popup.classList.contains("hidden")) {
+            document
+              .querySelectorAll(".popup-bubble")
+              .forEach((p) => p.classList.add("hidden"));
+            popup.classList.remove("hidden");
+          } else {
+            popup.classList.add("hidden");
+          }
+        });
+      });
+
+      // Close popups when clicking outside
+      document.addEventListener("click", (e) => {
+        if (!e.target.classList.contains("subcat-toggle")) {
+          document
+            .querySelectorAll(".popup-bubble")
+            .forEach((p) => p.classList.add("hidden"));
+        }
+      });
+    });
+
+    // Carousel navigation for Cats
+    const catSet1 = document.getElementById("catSet1");
+    const catSet2 = document.getElementById("catSet2");
+    const catNext = document.getElementById("catNext");
+    const catPrev = document.getElementById("catPrev");
+
+    catNext.addEventListener("click", () => {
+      catSet1.classList.add("hidden");
+      catSet2.classList.remove("hidden");
+    });
+
+    catPrev.addEventListener("click", () => {
+      catSet2.classList.add("hidden");
+      catSet1.classList.remove("hidden");
+    });
+
+    // Carousel navigation for Dogs
+    const dogSet1 = document.getElementById("dogSet1");
+    const dogSet2 = document.getElementById("dogSet2");
+    const dogNext = document.getElementById("dogNext");
+    const dogPrev = document.getElementById("dogPrev");
+
+    dogNext.addEventListener("click", () => {
+      dogSet1.classList.add("hidden");
+      dogSet2.classList.remove("hidden");
+    });
+
+    dogPrev.addEventListener("click", () => {
+      dogSet2.classList.add("hidden");
+      dogSet1.classList.remove("hidden");
+    });
+
+    // Modal open function
+    function openModal(petName) {
+      const modal = document.getElementById("adoptModal");
+      const modalTitle = document.getElementById("modalTitle");
+      modalTitle.textContent = `Adopt ${petName}`;
+      modal.classList.remove("hidden");
+    }
+
+    // Close modal when clicking the cancel button
+    document.getElementById("closeModal").addEventListener("click", function () {
+      document.getElementById("adoptModal").classList.add("hidden");
+    });
+
+    // Optional: Close modal if clicking outside modal content
+    window.addEventListener("click", (event) => {
+      const modal = document.getElementById("adoptModal");
+      if (event.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
+  </script>
+</body>
+</html>

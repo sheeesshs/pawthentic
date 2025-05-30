@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ear & Eye Care Cat | Pawthentic</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #ffffff; /* White background */
+      margin: 0;
+      padding: 0;
+      color: #222;
+      overflow-x: hidden;
+    }
+    
+    .popup-bubble {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      margin-left: 5px;
+      width: 400px;
+      background-color: #d48700;
+      color: white;
+      font-weight: 400;
+      font-family: "Poppins", sans-serif;
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      border-radius: 20px;
+      padding: 1.2rem 2rem;
+      box-shadow: 3px 3px 6px rgb(0 0 0 / 0.2);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .popup-bubble::before {
+      content: "";
+      position: absolute;
+      top: 1px;
+      left: -25px;
+      width: 0;
+      height: 0;
+      border-top: 30px solid transparent;
+      border-bottom: 30px solid transparent;
+      border-right: 40px solid #d48700;
+      border-radius: 3px;
+    }
+
+    .popup-bubble p {
+      margin: 0;
+      width: 100%;
+      text-align: center;
+      letter-spacing: 2px;
+      font-weight: 400;
+      font-size: 1.6rem;
+      white-space: nowrap;
+    }
+
+    .popup-bubble .flex {
+      display: flex;
+      gap: 2rem;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .popup-bubble a {
+      color: white;
+      text-decoration: none;
+      font-weight: 400;
+      font-size: 2rem;
+      padding: 0.6rem 2rem;
+      border-radius: 12px;
+      background: transparent;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+    }
+
+    .popup-bubble a:hover {
+      background-color: white;
+      color: #d48700;
+    }
+
+    main {
+      padding: 2rem 1rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    h1.page-title {
+      font-size: 2rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+    h2.section-title {
+      font-size: 1.3rem;
+      font-weight: 400;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .products-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+    .product-card {
+      background: white;
+      border-radius: 10px;
+      width: 220px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.15);
+      text-align: center;
+      padding: 1rem;
+      flex-shrink: 0;
+    }
+    .product-card img {
+      width: 180px;
+      height: 180px;
+      object-fit: contain;
+      margin-bottom: 1rem;
+    }
+    .product-name {
+      font-weight: 400;
+      font-size: 0.9rem;
+      min-height: 54px;
+      margin-bottom: 0.4rem;
+    }
+    .rating {
+      color: #d48700;
+      font-size: 0.85rem;
+      margin-bottom: 0.4rem;
+    }
+    .price {
+      font-weight: 400;
+      font-size: 1rem;
+      color: #004080;
+      margin-bottom: 1rem;
+    }
+    .add-to-cart-btn {
+      background-color: #004080;
+      color: white;
+      border: none;
+      padding: 12px 0;
+      border-radius: 15px;
+      cursor: pointer;
+      font-weight: 400;
+      font-size: 1.1rem;
+      transition: background-color 0.3s ease;
+      width: 100%;
+      text-align: center;
+      display: inline-block;
+    }
+    .add-to-cart-btn:hover {
+      background-color: #002d5a;
+    }
+
+    /* Variation grid */
+    #variationGrid .variation-option {
+      cursor: pointer;
+      background: white;
+      color: #d48700;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+      font-weight: 400;
+      box-shadow: 0 2px 6px rgb(0 0 0 / 0.15);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      user-select: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    #variationGrid .variation-option img {
+      height: 50px;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+
+    #variationGrid .variation-option.selected {
+      background: white;
+      color: #004080;
+      box-shadow: 0 0 0 3px #004080;
+      transform: scale(1.05);
+    }
+
+    /* Quantity selector */
+    .quantity-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+      font-size: 1.25rem;
+      color: white;
+      gap: 1rem;
+    }
+
+    .quantity-label {
+      white-space: nowrap;
+    }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .quantity-btn {
+      background-color: white;
+      color: #d48700;
+      font-weight: 400;
+      border-radius: 6px;
+      padding: 0.25rem 0.75rem;
+      user-select: none;
+      cursor: pointer;
+      border: none;
+      font-size: 1.5rem;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease;
+    }
+
+    .quantity-btn:hover {
+      background-color: #f0d78c;
+    }
+
+    .quantity-input {
+      width: 2.5rem;
+      text-align: center;
+      border-radius: 6px;
+      font-weight: 400;
+      font-size: 1.25rem;
+      border: none;
+      color: #004080;
+      background-color: white;
+      user-select: none;
+    }
+
+    .price-indicator {
+      letter-spacing: 1.5px;
+      text-shadow: 1px 1px 2px black;
+      font-weight: 400;
+    }
+
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+  <!-- Top Bar -->
+  <div class="bg-orange-500 py-2 px-4 flex justify-between items-center">
+    <div class="flex space-x-4 text-white text-xl">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-tiktok"></i></a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header
+    class="relative z-40 bg-amber-100 py-4 px-6 flex justify-between items-center"
+  >
+    <div class="flex items-center space-x-6">
+      <div class="text-3xl text-orange-500 flex items-center">
+        <a href="index.html">
+          <img
+            src="images/LOGO.png"
+            alt="Pawthentic Logo"
+            class="h-12 w-auto mr-2"
+          />
+        </a>
+      </div>
+
+      <nav
+        class="hidden md:flex space-x-6 text-black text-lg items-center"
+      >
+        <a href="index.html" class="text-black text-lg"
+          ><i class="fas fa-home"></i
+        ></a>
+
+        <!-- SERVICES DROPDOWN -->
+        <div class="group">
+          <button
+            class="flex items-center focus:outline-none group-hover:text-orange-500"
+          >
+            SERVICES
+            <svg
+              class="ml-1 w-4 h-4 fill-current"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M5.25 7.5l4.5 4.5 4.5-4.5h-9z" />
+            </svg>
+          </button>
+          <div
+            class="absolute left-0 mt-2 w-[2000px] bg-white bg-opacity-80 border rounded-md shadow-lg z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all p-6"
+          >
+            <a
+              href="PETGROOMING.html"
+              class=" px-4 py-3 text-lg"
+              >Pet Grooming</a
+            >
+            <a
+              href="petadoption.html"
+              class="block px-4 py-3 text-lg"
+              >Pet Adoption Assistance</a
+            >
+          </div>
+        </div>
+
+        <!-- PRODUCTS Dropdown -->
+        <div class="group ">
+          <button
+            class="flex items-center focus:outline-none group-hover:text-orange-500 text-black"
+          >
+            PRODUCTS
+            <svg
+              class="ml-1 w-4 h-4 fill-current"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M5.25 7.5l4.5 4.5 4.5-4.5h-9z" />
+            </svg>
+          </button>
+
+          <div
+            class="absolute left-0 mt-2 w-full max-w-[2000px] bg-white bg-opacity-80 rounded-md shadow-lg z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all p-4 flex justify-center gap-4"
+          >
+            <!-- Column 1 -->
+            <div class="min-w-[220px]">
+              <h3 class="text-black mb-2">FOOD & TREATS</h3>
+              <div class="flex flex-col space-y-2">
+                <div class="relative">
+                  <a
+                    href="wetfood.html"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="wetfoods"
+                    >Wet Foods</a
+                  >
+                  <div
+                    id="wetfoods"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="wetfood-cat.html">CAT</a>
+                      <a href="wetfood-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <a
+                    href="dryfood.html"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="dryfoods"
+                    >Dry Foods</a
+                  >
+                  <div
+                    id="dryfoods"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="dryfood-cat.html">CAT</a>
+                      <a href="dryfood-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <a
+                    href="treats.html"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="treats"
+                    >Treats</a
+                  >
+                  <div
+                    id="treats"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="treats-cat.html">CAT</a>
+                      <a href="treats-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Column 2 -->
+            <div class="min-w-[220px]">
+              <h3 class="text-black mb-2">TOYS & ACCESSORIES</h3>
+              <div class="flex flex-col space-y-2">
+                <div class="relative">
+                  <a
+                    href="toys.html"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="toys"
+                    >Toys</a
+                  >
+                  <div
+                    id="toys"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="toys-cat.html">CAT</a>
+                      <a href="toys-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <a
+                    href="feeding-supplies.html"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="feeding-supplies"
+                    >Feeding Supplies</a
+                  >
+                  <div
+                    id="feeding-supplies"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="feeding-supplies-cat.html">CAT</a>
+                      <a href="feeding-supplies-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <a
+                    href="collars-leash-harness.html"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="collars-leash-harness"
+                    >Collars, Leash & Harness</a
+                  >
+                  <div
+                    id="collars-leash-harness"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="collars-cat.html">CAT</a>
+                      <a href="collars-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <a
+                    href="carriers.html"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="carriers"
+                    >Carriers</a
+                  >
+                  <div
+                    id="carriers"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="carriers-cat.html">CAT</a>
+                      <a href="carriers-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Column 3 -->
+            <div class="min-w-[220px]">
+              <h3 class="text-black mb-2">GROOMING & HYGIENE</h3>
+              <div class="flex flex-col space-y-2">
+                <div class="relative">
+                  <a
+                    href="ear-and-eye-care.html"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="ear-and-eye-care"
+                    >Ear and Eye Care</a
+                  >
+                  <div
+                    id="ear-and-eye-care"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="ear-eye-cat.html">CAT</a>
+                      <a href="ear-eye-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <a
+                    href="oral-care.html"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="oral-care"
+                    >Oral Care</a
+                  >
+                  <div
+                    id="oral-care"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="oral-care-cat.html">CAT</a>
+                      <a href="oral-care-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <a
+                    href="bath-and-grooming-essentials.html"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="bath-and-grooming-essentials"
+                    >Bath and Grooming Essentials</a
+                  >
+                  <div
+                    id="bath-and-grooming-essentials"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="bath-grooming-cat.html">CAT</a>
+                      <a href="bath-grooming-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Column 4 -->
+            <div class="min-w-[220px]">
+              <h3 class="text-black mb-2">CLEANING & POTTY</h3>
+              <div class="flex flex-col space-y-2">
+                <div class="relative">
+                  <a
+                    href="#"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="cleaning-supplies"
+                    >Cleaning Supplies</a
+                  >
+                  <div
+                    id="cleaning-supplies"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="cleaning-supplies-cat.html">CAT</a>
+                      <a href="cleaning-supplies-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <a
+                    href="#"
+                    class="subcat-toggle block cursor-pointer"
+                    data-id="potty-essentials"
+                    >Potty Essentials</a
+                  >
+                  <div
+                    id="potty-essentials"
+                    class="hidden popup-bubble"
+                    style="left: 100%; margin-left: 10px;"
+                  >
+                    <p>SELECT PET CATEGORY:</p>
+                    <div class="flex">
+                      <a href="potty-essentials-cat.html">CAT</a>
+                      <a href="potty-essentials-dog.html">DOG</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Search + Icons -->
+    <div class="flex items-center space-x-4">
+      <div class="relative ">
+        <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
+        <input
+          type="text"
+          placeholder="Search"
+          class="rounded-full border border-black pl-10 pr-4 py-2 focus:outline-none w-full text-gray-800"
+        />
+      </div>
+      <a href="cart.html"><i class="fas fa-shopping-cart text-2xl"></i></a>
+      <a href="#"><i class="fas fa-user text-2xl"></i></a>
+      <a href="about-us.html" class="text-black text-lg hover:text-orange-500 font-semibold"">ABOUT US</a>
+    </div>
+  </header>
+
+<!-- Main Content -->
+<main>
+  <!-- First Section -->
+  <h1 class="page-title">Cats</h1>
+  <h2 class="section-title">Ear and Eye Care</h2>
+
+  <div class="relative">
+    <button onclick="showSlide(0)" class="absolute left-[-60px] top-[50%] text-black ">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+
+    <button onclick="showSlide(1)" class="absolute right-[-60px] top-[50%]  text-black px-4 py-2 ">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+
+    <div id="slide-0" class="products-container">
+      <div class="product-card">
+        <img src="EAR & EYE CARE CAT/1 Zymox Eye Ointment for Cats.jpg" alt="Zymox Eye Ointment for Cats" />
+        <div class="product-name">Zymox Eye Ointment for Cats</div>
+        <div class="rating">⭐ 4.8</div>
+        <div class="price">₱1,350.00 PHP</div>
+        <button class="add-to-cart-btn" onclick="openModal('Zymox Eye Ointment for Cats')">ADD TO CART</button>      
+      </div>
+      <div class="product-card">
+        <img src="EAR & EYE CARE CAT/2 Vet’s Best Ear Relief Wash for Cats.webp" alt="Vet’s Best Ear Relief Wash for Cats" />
+        <div class="product-name">Vet’s Best Ear Relief Wash for Cats</div>
+        <div class="rating">⭐ 4.7</div>
+        <div class="price">₱1,000.00 PHP</div>
+        <button class="add-to-cart-btn" onclick="openModal('Vet’s Best Ear Relief Wash for Cats')">ADD TO CART</button>      
+      </div>
+      <div class="product-card">
+        <img src="EAR & EYE CARE CAT/3 Pet MD Eye Relief Eye Drops for Cats.webp" alt="Pet MD Eye Relief Eye Drops for Cats" />
+        <div class="product-name">Pet MD Eye Relief Eye Drops for Cats</div>
+        <div class="rating">⭐ 4.9</div>
+        <div class="price">₱1,150.00 PHP</div>
+        <button class="add-to-cart-btn" onclick="openModal('Pet MD Eye Relief Eye Drops for Cats')">ADD TO CART</button>      
+      </div>
+      <div class="product-card">
+        <img src="EAR & EYE CARE CAT/4 Animal Essentials Eye and Ear Wipes for Cats.jpg" alt="Animal Essentials Eye and Ear Wipes for Cats" />
+        <div class="product-name">Animal Essentials Eye and Ear Wipes for Cats</div>
+        <div class="rating">⭐ 4.6</div>
+        <div class="price">₱700.00 PHP</div>
+        <button class="add-to-cart-btn" onclick="openModal('Animal Essentials Eye and Ear Wipes for Cats')">ADD TO CART</button>      
+      </div>
+    </div>
+
+    <div id="slide-1" class="products-container hidden">
+      <div class="product-card">
+        <img src="EAR & EYE CARE CAT/5 Vet’s Best Eye Wash for Cats.avif" alt="Vet’s Best Eye Wash for Cats" />
+        <div class="product-name">Vet’s Best Eye Wash for Cats</div>
+        <div class="rating">⭐ 4.7</div>
+        <div class="price">₱950.00 PHP</div>
+        <button class="add-to-cart-btn" onclick="openModal('Vet’s Best Eye Wash for Cats')">ADD TO CART</button>
+      </div>
+      <div class="product-card">
+        <img src="EAR & EYE CARE CAT/6 Vet’s Best Ear Cleaner for Cats.webp" alt="Vet’s Best Ear Cleaner for Cats" />
+        <div class="product-name">Vet’s Best Ear Cleaner for Cats</div>
+        <div class="rating">⭐ 4.8</div>
+        <div class="price">₱850.00 PHP</div>
+        <button class="add-to-cart-btn" onclick="openModal('Vet’s Best Ear Cleaner for Cats')">ADD TO CART</button>
+      </div>
+      <div class="product-card">
+        <img src="EAR & EYE CARE CAT/7 Virbac Epi-Otic Ear Cleaner for Cats.jpg" alt="Virbac Epi-Otic Ear Cleaner for Cats" />
+        <div class="product-name">Virbac Epi-Otic Ear Cleaner for Cats</div>
+        <div class="rating">⭐ 4.9</div>
+        <div class="price">₱1,250.00 PHP</div>
+        <button class="add-to-cart-btn" onclick="openModal('Virbac Epi-Otic Ear Cleaner for Cats')">ADD TO CART</button>
+      </div>
+      <div class="product-card">
+        <img src="EAR & EYE CARE CAT/8 Zesty Paws Calming Chews for Cats.webp" alt="Zesty Paws Calming Chews for Cats" />
+        <div class="product-name">Zesty Paws Calming Chews for Cats</div>
+        <div class="rating">⭐ 4.7</div>
+        <div class="price">₱1,100.00 PHP</div>
+        <button class="add-to-cart-btn" onclick="openModal('Zesty Paws Calming Chews for Cats')">ADD TO CART</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Second Section -->
+  <div class="mt-24">
+    <h1 class="page-title">Cats</h1>
+    <h2 class="section-title">Nutrition and Supplements for Eye & Ear Health</h2>
+
+    <div class="relative">
+      <button onclick="showSlide2(0)" class="absolute left-[-60px] top-[50%] text-black ">
+          <i class="fas fa-chevron-left"></i>
+      </button>
+
+      <button onclick="showSlide2(1)" class="absolute right-[-60px] top-[50%]  text-black px-4 py-2 ">
+          <i class="fas fa-chevron-right"></i>
+      </button>
+
+      <div id="slide2-0" class="products-container">
+        <div class="product-card">
+          <img src="EAR & EYE CARE CAT/9 VetriScience Labs Eye Health Supplement.jpg" alt="VetriScience Labs Eye Health Supplement" />
+          <div class="product-name">VetriScience Labs Eye Health Supplement</div>
+          <div class="rating">⭐ 4.9</div>
+          <div class="price">₱1,400.00 PHP</div>
+          <button class="add-to-cart-btn" onclick="openModal('VetriScience Labs Eye Health Supplement')">ADD TO CART</button>
+        </div>
+        <div class="product-card">
+          <img src="EAR & EYE CARE CAT/10 Oligo Pet Omega 3 Supplement.jpg" alt="Oligo Pet Omega 3 Supplement" />
+          <div class="product-name">Oligo Pet Omega 3 Supplement</div>
+          <div class="rating">⭐ 4.7</div>
+          <div class="price">₱1,100.00 PHP</div>
+          <button class="add-to-cart-btn" onclick="openModal('Oligo Pet Omega 3 Supplement')">ADD TO CART</button>
+        </div>
+        <div class="product-card">
+          <img src="EAR & EYE CARE CAT/11 Zesty Paws Allergy Immune Supplement.webp" alt="Zesty Paws Allergy Immune Supplement" />
+          <div class="product-name">Zesty Paws Allergy Immune Supplement</div>
+          <div class="rating">⭐ 4.8</div>
+          <div class="price">₱1,250.00 PHP</div>
+          <button class="add-to-cart-btn" onclick="openModal('Zesty Paws Allergy Immune Supplement')">ADD TO CART</button>
+        </div>
+        <div class="product-card">
+          <img src="EAR & EYE CARE CAT/12 NaturVet Eye Care Drops.jpg" alt="NaturVet Eye Care Drops" />
+          <div class="product-name">NaturVet Eye Care Drops</div>
+          <div class="rating">⭐ 4.6</div>
+          <div class="price">₱900.00 PHP</div>
+          <button class="add-to-cart-btn" onclick="openModal('NaturVet Eye Care Drops')">ADD TO CART</button>
+        </div>
+      </div>
+
+      <div id="slide2-1" class="products-container hidden">
+        <div class="product-card">
+          <img src="" alt="Zesty Paws Calming Chews" />
+          <div class="product-name">Zesty Paws Calming Chews</div>
+          <div class="rating">⭐ 4.7</div>
+          <div class="price">₱1,000.00 PHP</div>
+          <button class="add-to-cart-btn" onclick="openModal('Zesty Paws Calming Chews')">ADD TO CART</button>
+        </div>
+        <div class="product-card">
+          <img src="" alt="Vet’s Best Ear Cleaner" />
+          <div class="product-name">Vet’s Best Ear Cleaner</div>
+          <div class="rating">⭐ 4.8</div>
+          <div class="price">₱800.00 PHP</div>
+          <button class="add-to-cart-btn" onclick="openModal('Vet’s Best Ear Cleaner')">ADD TO CART</button>
+        </div>
+        <div class="product-card">
+          <img src="" alt="Animal Essentials Ear and Eye Wipes" />
+          <div class="product-name">Animal Essentials Ear and Eye Wipes</div>
+          <div class="rating">⭐ 4.5</div>
+          <div class="price">₱700.00 PHP</div>
+          <button class="add-to-cart-btn" onclick="openModal('Animal Essentials Ear and Eye Wipes')">ADD TO CART</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Variation / Add-to-Cart Modal -->
+<div id="addToCartModal" class="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center hidden">
+  <div class="bg-[#d48700] rounded-lg p-6 w-[90%] max-w-lg shadow-xl relative text-white font-normal">
+    <button onclick="closeModal()" class="absolute top-2 right-3 text-white text-2xl hover:text-red-500">&times;</button>
+    <h2 class="text-2xl mb-4 text-left font-normal">Select a Variation:</h2>
+    <div id="variationGrid" class="grid grid-cols-2 gap-4 mb-6">
+      <!-- Variation options inserted here dynamically -->
+    </div>
+
+    <div class="quantity-container">
+      <label for="quantity" class="quantity-label">Quantity</label>
+      <div class="quantity-controls">
+        <button type="button" onclick="changeQuantity(-1)" class="quantity-btn">−</button>
+        <input type="number" id="quantity" value="1" min="1" readonly class="quantity-input" />
+        <button type="button" onclick="changeQuantity(1)" class="quantity-btn">+</button>
+      </div>
+    </div>
+
+    <div id="priceIndicator" class="price-indicator mb-4 text-center text-white text-xl font-normal">
+      Price: ₱0.00 PHP
+    </div>
+
+    <button id="addToCartBtn" class="add-to-cart-btn">
+      Add to Cart
+    </button>
+  </div>
+</div>
+
+  <script>
+  const productVariations = {
+    // First slide 0 (Ear and Eye Care products - slide 1)
+    "Zymox Eye Ointment for Cats": ["0.5oz", "1oz"],
+    "Vet’s Best Ear Relief Wash for Cats": ["8oz"],
+    "Pet MD Eye Relief Eye Drops for Cats": ["0.5oz", "1oz"],
+    "Animal Essentials Eye and Ear Wipes for Cats": ["40 wipes pack", "50 wipes pack"],
+
+    // First slide 1 (Ear and Eye Care products - slide 2)
+    "Vet’s Best Eye Wash for Cats": ["8oz"],
+    "Vet’s Best Ear Cleaner for Cats": ["8oz"],
+    "Virbac Epi-Otic Ear Cleaner for Cats": ["250ml", "500ml"],
+    "Zesty Paws Calming Chews for Cats": ["30 chews"],
+
+    // Second section slide 0 (Nutrition & Supplements - slide 1)
+    "VetriScience Labs Eye Health Supplement": ["60 tablets"],
+    "Oligo Pet Omega 3 Supplement": ["120 capsules"],
+    "Zesty Paws Allergy Immune Supplement": ["60 soft chews"],
+    "NaturVet Eye Care Drops": ["0.5oz", "1oz"],
+
+    // Second section slide 1 (Nutrition & Supplements - slide 2)
+    "Zesty Paws Calming Chews": ["30 chews"],
+    "Vet’s Best Ear Cleaner": ["8oz"],
+    "Animal Essentials Ear and Eye Wipes": ["40 wipes pack", "50 wipes pack"],
+  };
+
+  // Variation images map (dummy URLs; replace with actual)
+  const productVariationImages = {
+    "Zymox Eye Ointment for Cats": {
+      "0.5oz": "EAR & EYE CARE CAT/1 Zymox Eye Ointment for Cats.jpg",
+      "1oz": "EAR & EYE CARE CAT/1 Zymox Eye Ointment for Cats.jpg",
+    },
+    "Vet’s Best Ear Relief Wash for Cats": {
+      "8oz": "EAR & EYE CARE CAT/2 Vet’s Best Ear Relief Wash for Cats.webp",
+    },
+    "Pet MD Eye Relief Eye Drops for Cats": {
+      "0.5oz": "EAR & EYE CARE CAT/3 Pet MD Eye Relief Eye Drops for Cats.webp",
+      "1oz": "EAR & EYE CARE CAT/3 Pet MD Eye Relief Eye Drops for Cats.webp",
+    },
+    "Animal Essentials Eye and Ear Wipes for Cats": {
+      "40 wipes pack": "EAR & EYE CARE CAT/4 Animal Essentials Eye and Ear Wipes for Cats.jpg",
+      "50 wipes pack": "EAR & EYE CARE CAT/4 Animal Essentials Eye and Ear Wipes for Cats.jpg",
+    },
+    "Vet’s Best Eye Wash for Cats": {
+      "8oz": "EAR & EYE CARE CAT/5 Vet’s Best Eye Wash for Cats.avif",
+    },
+    "Vet’s Best Ear Cleaner for Cats": {
+      "8oz": "EAR & EYE CARE CAT/6 Vet’s Best Ear Cleaner for Cats.webp",
+    },
+    "Virbac Epi-Otic Ear Cleaner for Cats": {
+      "250ml": "EAR & EYE CARE CAT/8 Zesty Paws Calming Chews for Cats.webp",
+      "500ml": "EAR & EYE CARE CAT/8 Zesty Paws Calming Chews for Cats.webp",
+    },
+    "Zesty Paws Calming Chews for Cats": {
+      "30 chews": "EAR & EYE CARE CAT/8 Zesty Paws Calming Chews for Cats.webp",
+    },
+    "VetriScience Labs Eye Health Supplement": {
+      "60 tablets": "EAR & EYE CARE CAT/9 VetriScience Labs Eye Health Supplement.jpg",
+    },
+    "Oligo Pet Omega 3 Supplement": {
+      "120 capsules": "EAR & EYE CARE CAT/10 Oligo Pet Omega 3 Supplement.jpg",
+    },
+    "Zesty Paws Allergy Immune Supplement": {
+      "60 soft chews": "EAR & EYE CARE CAT/13 Zesty Paws Calming Chews.jpg",
+    },
+    "NaturVet Eye Care Drops": {
+      "0.5oz": "EAR & EYE CARE CAT/12 NaturVet Eye Care Drops.jpg",
+      "1oz": "EAR & EYE CARE CAT/12 NaturVet Eye Care Drops.jpg",
+    },
+    "Vet’s Best Ear Cleaner": {
+      "8oz": "EAR & EYE CARE CAT/14 Vet’s Best Ear Cleaner.jpg",
+    },
+    "Animal Essentials Ear and Eye Wipes": {
+      "40 wipes pack": "EAR & EYE CARE CAT/15 Animal Essentials Ear and Eye Wipes.webp",
+      "50 wipes pack": "EAR & EYE CARE CAT/15 Animal Essentials Ear and Eye Wipes.webp",
+    },
+  };
+
+  let selectedVariation = null;
+  let currentProductName = null;
+
+  function openModal(productName) {
+    currentProductName = productName;
+    const modal = document.getElementById("addToCartModal");
+    const variationGrid = document.getElementById("variationGrid");
+    const quantityInput = document.getElementById("quantity");
+    const priceIndicator = document.getElementById("priceIndicator");
+
+    const productPriceMap = {
+      "Zymox Eye Ointment for Cats": {
+        "0.5oz": 1350,
+        "1oz": 1500,
+      },
+      "Vet’s Best Ear Relief Wash for Cats": {
+        "8oz": 1000,
+      },
+      "Pet MD Eye Relief Eye Drops for Cats": {
+        "0.5oz": 1150,
+        "1oz": 1250,
+      },
+      "Animal Essentials Eye and Ear Wipes for Cats": {
+        "40 wipes pack": 700,
+        "50 wipes pack": 1000,
+      },
+      "Vet’s Best Eye Wash for Cats": {
+        "8oz": 950,
+      },
+      "Vet’s Best Ear Cleaner for Cats": {
+        "8oz": 850,
+      },
+      "Virbac Epi-Otic Ear Cleaner for Cats": {
+        "250ml": 1250,
+        "500ml": 1550,
+      },
+      "Zesty Paws Calming Chews for Cats": {
+        "30 chews": 1100,
+      },
+      "VetriScience Labs Eye Health Supplement": {
+        "60 tablets": 1400,
+      },
+      "Oligo Pet Omega 3 Supplement": {
+        "120 capsules": 1100,
+      },
+      "Zesty Paws Allergy Immune Supplement": {
+        "60 soft chews": 1250,
+      },
+      "NaturVet Eye Care Drops": {
+        "0.5oz": 900,
+        "1oz": 1100,
+      },
+      "Zesty Paws Calming Chews": {
+        "30 chews": 1000,
+      },
+      "Vet’s Best Ear Cleaner": {
+        "8oz": 800,
+      },
+      "Animal Essentials Ear and Eye Wipes": {
+        "40 wipes pack": 700,
+        "50 wipes pack": 100,
+      },
+    };
+
+    variationGrid.innerHTML = "";
+    selectedVariation = null;
+    quantityInput.value = 1;
+    priceIndicator.textContent = "Price: ₱0.00 PHP";
+
+    const variations = productVariations[productName] || [];
+
+    variations.forEach((variation) => {
+      const optionDiv = document.createElement("div");
+      optionDiv.className = "variation-option";
+
+      const imgSrc =
+        productVariationImages[currentProductName] &&
+        productVariationImages[currentProductName][variation]
+          ? productVariationImages[currentProductName][variation]
+          : "https://via.placeholder.com/50";
+
+      const img = document.createElement("img");
+      img.src = imgSrc;
+      img.alt = variation;
+
+      const label = document.createElement("span");
+      label.textContent = variation.toUpperCase();
+
+      optionDiv.appendChild(img);
+      optionDiv.appendChild(label);
+
+      optionDiv.addEventListener("click", () => {
+        document
+          .querySelectorAll("#variationGrid .variation-option")
+          .forEach((el) => el.classList.remove("selected"));
+        optionDiv.classList.add("selected");
+        selectedVariation = variation;
+
+        const price =
+          (productPriceMap[currentProductName] &&
+            productPriceMap[currentProductName][selectedVariation]) ||
+          0;
+        priceIndicator.textContent = `Price: ₱${price.toFixed(2)} PHP`;
+      });
+
+      variationGrid.appendChild(optionDiv);
+    });
+
+    modal.classList.remove("hidden");
+
+    document.getElementById("addToCartBtn").onclick = () => {
+      if (!selectedVariation) {
+        alert(
+          "✨ Hey there! Don’t forget to select a variation! 🎀 Your pet deserves the best! 🐶🐱"
+        );
+        return;
+      }
+      const quantity = parseInt(quantityInput.value);
+
+      const price =
+        (productPriceMap[currentProductName] &&
+          productPriceMap[currentProductName][selectedVariation]) ||
+        0;
+
+      let cart = JSON.parse(localStorage.getItem("pawthenticCart")) || [];
+
+      const existingIndex = cart.findIndex(
+        (item) =>
+          item.productName === currentProductName &&
+          item.variation === selectedVariation
+      );
+
+      if (existingIndex !== -1) {
+        cart[existingIndex].quantity += quantity;
+      } else {
+       cart.push({
+            productName: currentProductName,
+            variation: selectedVariation,
+            price,
+            quantity,
+            image:
+              (productVariationImages[currentProductName] &&
+                productVariationImages[currentProductName][selectedVariation]) ||
+              "https://via.placeholder.com/60x60?text=No+Image"
+          });
+      }
+
+      localStorage.setItem("pawthenticCart", JSON.stringify(cart));
+
+      alert(
+        `🐾 Yay! You've added to your Pawthentic cart:\n💖 Product: ${currentProductName}\n✨ Variation: ${selectedVariation}\n🎉 Quantity: ${quantity}\n\nThanks fur shopping with Pawthentic! 🐶🐱`
+      );
+
+      closeModal();
+    };
+  }
+
+  function changeQuantity(delta) {
+    const quantityInput = document.getElementById("quantity");
+    let current = parseInt(quantityInput.value) || 1;
+    current += delta;
+    if (current < 1) current = 1;
+    quantityInput.value = current;
+  }
+
+  function closeModal() {
+    document.getElementById("addToCartModal").classList.add("hidden");
+  }
+
+  // Slide navigation functions
+  function showSlide(index) {
+    document.getElementById("slide-0").classList.add("hidden");
+    document.getElementById("slide-1").classList.add("hidden");
+    document.getElementById(`slide-${index}`).classList.remove("hidden");
+  }
+
+  function showSlide2(index) {
+    document.getElementById("slide2-0").classList.add("hidden");
+    document.getElementById("slide2-1").classList.add("hidden");
+    document.getElementById(`slide2-${index}`).classList.remove("hidden");
+  }
+
+  // Subcategory toggle for CAT/DOG popups
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggles = document.querySelectorAll(".subcat-toggle");
+
+    toggles.forEach((toggle) => {
+      toggle.addEventListener("click", (e) => {
+        e.preventDefault();
+        const id = toggle.getAttribute("data-id");
+        const popup = document.getElementById(id);
+
+        // Toggle popup visibility
+        if (popup.classList.contains("hidden")) {
+          // Hide all others first
+          document
+            .querySelectorAll(".popup-bubble")
+            .forEach((p) => p.classList.add("hidden"));
+          popup.classList.remove("hidden");
+        } else {
+          popup.classList.add("hidden");
+        }
+      });
+    });
+
+    // Close popups when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!e.target.classList.contains("subcat-toggle")) {
+        document
+          .querySelectorAll(".popup-bubble")
+          .forEach((p) => p.classList.add("hidden"));
+      }
+    });
+  });
+
+  // Rating render
+  function renderRating(rating) {
+    const fullStars = Math.floor(rating);
+    const halfStar = rating - fullStars >= 0.5;
+    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+    let starsHtml = "";
+
+    for (let i = 0; i < fullStars; i++) {
+      starsHtml += "⭐";
+    }
+    if (halfStar) {
+      starsHtml += "✩";
+    }
+    for (let i = 0; i < emptyStars; i++) {
+      starsHtml += "☆";
+    }
+
+    return `${starsHtml} ${rating.toFixed(1)}`;
+  }
+
+  document.querySelectorAll(".rating").forEach((ratingDiv) => {
+    const ratingText = ratingDiv.textContent.trim();
+    const ratingNum = parseFloat(ratingText.match(/\d+(\.\d+)?/)[0]);
+    ratingDiv.innerHTML = renderRating(ratingNum);
+  });
+</script>
