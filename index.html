@@ -1509,6 +1509,31 @@
   window.openModal = openModal;
   window.closeModal = closeModal;
   window.changeQuantity = changeQuantity;
+
+  document.addEventListener("DOMContentLoaded", () => {
+      const toggles = document.querySelectorAll(".subcat-toggle");
+
+      toggles.forEach((toggle) => {
+        toggle.addEventListener("click", (e) => {
+          e.preventDefault();
+          const id = toggle.getAttribute("data-id");
+          const popup = document.getElementById(id);
+
+          if (popup.classList.contains("hidden")) {
+            document.querySelectorAll(".popup-bubble").forEach((p) => p.classList.add("hidden"));
+            popup.classList.remove("hidden");
+          } else {
+            popup.classList.add("hidden");
+          }
+        });
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!e.target.classList.contains("subcat-toggle")) {
+          document.querySelectorAll(".popup-bubble").forEach((p) => p.classList.add("hidden"));
+        }
+      });
+    });
 </script>
 
 
